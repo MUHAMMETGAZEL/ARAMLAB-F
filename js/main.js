@@ -58,7 +58,12 @@ document.getElementById('view-suggestions').classList.add('hidden');
 function updateFooterVisibility() {
   const footer = document.querySelector('.footer');
   if (!footer) return;
-  footer.style.display = (window.isAdmin === true) ? 'block' : 'none';
+if (window.isAdmin === true) {
+  footer.classList.remove('hidden');
+} else {
+  footer.classList.add('hidden');
+}
+
 }
 /*
 // تعديل دالة updateLicenseUI
