@@ -1,4 +1,11 @@
 
+.notification { 
+  display: none;
+}
+.notification.is-visible {
+  display: block;
+}
+
 .muted-timestamp {
     font-size: 0.8rem;
     color: gray;
