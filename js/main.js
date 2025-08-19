@@ -90,19 +90,16 @@ document.getElementById('view-suggestions').classList.add('flex'); // إذا ت�
 
 async function fetchUserRole() {
   try {
-    const response = await fetch('http://localhost:5001/api/auth/verify', {
-      credentials: 'include'
-    });
-
-    if (!response.ok) {
-      //console.warn('التحقق من صلاحية المستخدم فشل');
-      return null;
-    }
-
+    const response = await fetch(
+      (location.hostname === 'localhost'
+        ? 'http://localhost:5001/api'
+        : 'https://api.aramlab.info/api') + '/auth/verify',
+      { credentials: 'include' }
+    );
+    if (!response.ok) return null;
     const data = await response.json();
     return data.user?.role || null;
-  } catch (error) {
-    //console.error('فشل في التحقق من صلاحية المستخدم:', error);
+  } catch {
     return null;
   }
 }
