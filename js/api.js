@@ -15,7 +15,7 @@ baseUrl:
       if (!response.ok) { const e = await response.json().catch(()=>({})); throw new Error(e.error || 'Request failed'); }
       return response.json();
     } catch (error) { console.error(`خطأ في الطلب ${method} إلى ${fullUrl}:`, error); throw error; }
-  },
+  }, 
 
   getSuggestions() {
     return this.request('/suggestions', 'GET', null, true); // يجب أن يكون true هنا
