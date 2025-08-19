@@ -1,7 +1,7 @@
 const ApiClient = {
   baseUrl: (location.hostname === 'localhost')
-    ? '/api'
-    : 'https://api.aramlab.info/api',   // إنتاج,
+    ? 'http://localhost:5001/api'
+    : 'https://api.aramlab.info/api',
   async request(endpoint, method = 'GET', data = null, requiresAuth = false) {
 
     const fullUrl = this.baseUrl + endpoint;
