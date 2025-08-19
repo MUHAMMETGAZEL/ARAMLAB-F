@@ -5,10 +5,8 @@ function showNotification(title, message) {
     const messageElement = document.getElementById('notification-message');
     titleElement.textContent = title;
     messageElement.textContent = message;
-    notification.style.display = 'block';
-    setTimeout(() => {
-        notification.style.display = 'none';
-    }, 3000);
+   notification.classList.add('is-visible');
+setTimeout(()=>{ notification.classList.remove('is-visible'); }, 3000);
 }
 
 // تحديث وقت آخر حفظ
