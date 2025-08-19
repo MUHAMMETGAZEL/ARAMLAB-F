@@ -75,9 +75,12 @@ if (cancelLoginBtn) cancelLoginBtn.addEventListener('click', closeLoginModal);
 /////////
 async function checkAuthStatus() {
   try {
-    const res = await fetch('http://localhost:5001/api/auth/verify', {
-      credentials: 'include'
-    });
+    const res = await fetch(
+(location.hostname === 'localhost'
+        ? 'http://localhost:5001/api'
+        : 'https://api.aramlab.info/api') + '/auth/verify',
+      { credentials: 'include' }
+);
     if (!res.ok) throw new Error('Unauthorized');
     const data = await res.json();
 
