@@ -109,8 +109,8 @@ function updateLicenseUI() {
   // حالة الشريط داخل المودال (اختياري)
   if (licenseStatus) {
     licenseStatus.innerHTML = licenseActive
-      ? '<span class="license-active"><i class="fas fa-check-circle"></i>License Activated</span>'
-      : '<span class="license-inactive"><i class="fas fa-times-circle"></i>License is Not Activated</span>';
+      ? '<span class="license-active"><i class="fas fa-check-circle"></i>  License Activated</span>'
+      : '<span class="license-inactive"><i class="fas fa-times-circle"></i>  License is Not Activated</span>';
   }
 
   // زر الاقتراح دائمًا ظاهر
