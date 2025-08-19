@@ -117,7 +117,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const userRole = await fetchUserRole();
   if (userRole !== 'admin') {
     const adminButtons = document.querySelectorAll('.admin-only');
-    adminButtons.forEach(btn => btn.style.display = 'none');
+  adminButtons.forEach(btn => {
+  btn.classList.add('hidden');
+  btn.classList.remove('flex');
+});
     window.isAdmin = false;
   } else {
     window.isAdmin = true;
