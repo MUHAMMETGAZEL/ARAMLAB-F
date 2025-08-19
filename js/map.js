@@ -619,7 +619,9 @@ function transitionBackToMain() {
     nestingLevel = 0;
     rotationAngle = 0;
     drawMap();
-    document.getElementById('rotation-controls').style.display = 'flex';
+    const rc = document.getElementById('rotation-controls');
+rc.classList.remove('hidden');
+rc.classList.add('flex');
     activeSection = null;
     
     // إخفاء شاشة الانتقال بعد انتهاء التأثير
