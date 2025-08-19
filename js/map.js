@@ -1,14 +1,58 @@
-// متغيرات الخريطة
-const width = 800;
-const height = 800;
+const TAU = Math.PI * 2;
+const ARC_TEXT_OFFSET = -75 * Math.PI / 180; 
+
+// تقييد زاوية إلى [0, 2π)
+function normalizeAngle(a) {
+  a = a % TAU;
+  return a < 0 ? a + TAU : a;
+}
+
+
+function isBottomHemisphere(angle) {
+  const a = normalizeAngle(angle);
+  return a > Math.PI / 2 && a < 3 * Math.PI / 2;
+}
+
+// توليد مسار SVG لقوس دائري بمركز (cx, cy)، نصف قطر r، من زاوية a0 إلى a1
+function arcPathD(cx, cy, r, a0, a1) {
+  const largeArc = Math.abs(a1 - a0) > Math.PI ? 1 : 0;
+  const sweep = a1 > a0 ? 1 : 0;
+
+  const x0 = cx + r * Math.cos(a0);
+  const y0 = cy + r * Math.sin(a0);
+  const x1 = cx + r * Math.cos(a1);
+  const y1 = cy + r * Math.sin(a1);
+
+  // A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+  return `M ${x0} ${y0} A ${r} ${r} 0 ${largeArc} ${sweep} ${x1} ${y1}`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+const scaleFactor = 1.5;
+
+
+
+// مقاسات الخريطة
+const width = 800 * scaleFactor;
+const height = 800 * scaleFactor;
 const centerX = width / 2;
 const centerY = height / 2;
 let svg = null;
 
 // الحلقات في الدائرة الرئيسية
 const rings = [
-  { id: 1, innerRadius: 50, outerRadius: 150, name: "الحلقة الداخلية", color: "rgba(76, 161, 175, 0.3)" },
-  { id: 2, innerRadius: 150, outerRadius: 350, name: "الحلقة الخارجية", color: "rgba(255, 126, 95, 0.3)" }
+  { id: 1, innerRadius: 50 * scaleFactor, outerRadius: 150 * scaleFactor, name: "الحلقة الداخلية", color: "rgba(76, 161, 175, 0.3)" },
+  { id: 2, innerRadius: 150 * scaleFactor, outerRadius: 350 * scaleFactor, name: "الحلقة الخارجية", color: "rgba(255, 126, 95, 0.3)" }
 ];
 
 // القطاعات الرئيسية
@@ -21,11 +65,12 @@ const sectors = [
     endAngle: 2*Math.PI/5, 
     subsections: [
       "Incubators",
+      "Accelerators",
       "Venture Studios",
-      "Competition Events",
+      "Competitions",
       "Mentorship Programs",
       "Academic Institutions",
-      "Talent Development"
+      "Talent Development Organizations"
     ]
   },
   { 
@@ -36,7 +81,7 @@ const sectors = [
     endAngle: 4*Math.PI/5, 
     subsections: [
       "Co-working Spaces",
-      "Research and Development Labs",
+      "Research and Development, Labs",
       "Startup Hiring",
       "Startup Accounting",
       "Startup Marketing",
@@ -57,16 +102,16 @@ const sectors = [
   },
   { 
     id: 4, 
-    name: "Networking and Cultures", 
+    name: "Networking and Culture", 
     color: "#cc3366", 
     startAngle: 6*Math.PI/5, 
     endAngle: 8*Math.PI/5, 
     subsections: [
       "Media Support",
-      "Events Orgnizer",
+      "Events",
       "NGOs",
       "Startup Podcasts",
-      "Prize Giver" 
+      "Awards" 
     ]
   },
   { 
@@ -76,9 +121,9 @@ const sectors = [
     startAngle: 8*Math.PI/5, 
     endAngle: 2*Math.PI, 
     subsections: [
-      "Financial Development Institutions",
-      "TVenture Capitals",
-      "Private Equity",
+      "Development Financial Institutions",
+      "Venture Capitals",
+      "Private Equity Funds",
       "Angel Investors",
       "Crowdfunding",
       "Family Offices",
@@ -145,7 +190,8 @@ function drawMap() {
             .attr("transform", `translate(${centerX}, ${centerY})`)
             .attr("fill", sector.color)
             .attr("stroke", "white")
-            .attr("stroke-width", 1)
+            .attr("stroke-width", 3)
+           // .attr("stroke-width", 1)
             .attr("opacity", 0.8)
             .attr("class", "subsection")
             .attr("data-sector", sector.id)
@@ -169,7 +215,7 @@ function drawMap() {
           const x = centerX + textRadius * Math.cos(correctedAngle);
           const y = centerY + textRadius * Math.sin(correctedAngle);
           let rotation = (middleAngle * 180 / Math.PI) + 93;
-          if (rotation > 90 && rotation < 270) {
+          if (rotation > 90 && rotation < 245) {
             rotation += 180;
           }
           const g = svg.append("g")
@@ -200,7 +246,7 @@ function drawMap() {
           // إضافة النسبة المئوية
           lines.push(percentageText);
           
-          const lineHeight = 12;
+          const lineHeight = 14;
           const startY = -((lines.length - 1) * lineHeight) / 2;
           lines.forEach((line, index) => {
             g.append("text")
@@ -209,7 +255,7 @@ function drawMap() {
               .attr("text-anchor", "middle")
               .attr("dy", "0.35em")
               .attr("fill", "#ffffff")
-              .attr("font-size", "10px")
+              .attr("font-size", "14px")
               .attr("font-weight", "bold")
               .text(line);
           });
@@ -225,8 +271,10 @@ function drawMap() {
           .attr("transform", `translate(${centerX}, ${centerY})`)
           .attr("fill", sector.color)
           .attr("stroke", "white")
-          .attr("stroke-width", 1)
-          .attr("opacity", 0.8)
+        //  .attr("stroke-width", 1)
+        .attr("stroke-width", 4)
+
+        .attr("opacity", 0.8)
           .attr("class", "sector")
           .attr("data-sector", sector.id)
           .on("mouseover", function() {
@@ -240,97 +288,114 @@ function drawMap() {
   });
   
   const innerLabels = [
-    { 
-      lines: ["Regulations and", "Government Support"], 
-      color: "#ffff",
-      angle: Math.PI * 0.5 + rotationAngle
-    },
-    { 
-      lines: ["Ideation Support"],
-      color: "#ffff",
-      angle: Math.PI * 1.7 + rotationAngle
-    },
-    { 
-      lines: ["Networking and", "Cultures"],
-      color: "#ffff",
-      angle: Math.PI * 0.9 + rotationAngle
-    },
-    { 
-      lines: ["Operation, Growth", "and Markets"],
-      color: "#ffff",
-      angle: Math.PI * 0.1 + rotationAngle
-    },
-    { 
-      lines: ["Funding"],
-      color: "#ffff",
-      angle: Math.PI * 3.3 + rotationAngle
-    }
+    { lines: ["Regulations and", "Government Support"], color: "#ffff", angle: Math.PI * 0.5 + rotationAngle },
+    { lines: ["Ideation Support"],                          color: "#ffff", angle: Math.PI * 1.7 + rotationAngle },
+    { lines: ["Networking and", "Culture"],               color: "#ffff", angle: Math.PI * 0.9 + rotationAngle },
+    { lines: ["Operation, Growth", "and Markets"],         color: "#ffff", angle: Math.PI * 0.1 + rotationAngle },
+    { lines: ["Funding"],                                   color: "#ffff", angle: Math.PI * 3.3 + rotationAngle }
   ];
   
-  const innerRadius = 100;
+  const baseInnerRadius = 100 * scaleFactor;
+  
+  // مدى القوس الذي سيسير عليه كل نص (اضبطه حسب الذوق: 0.7 ~ 0.95 راديان ≈ 40°~55°)
+  const labelArcSpan = 0.9;
+  
+  // المسافة بين الأسطر عندما يكون هناك سطران أو أكثر
+  const lineGap = 20;  // px تقريبًا
+  
+  // حجم الخط الأساسي (يمكنك تعديله بسهولة)
+  const baseFontSize = 15;
+  
+  // الأفضل وضع المسارات داخل <defs>
+  const defs = svg.append("defs");
+  
   innerLabels.forEach((label) => {
-    const x = centerX + innerRadius * Math.cos(label.angle);
-    const y = centerY + innerRadius * Math.sin(label.angle);
-    let rotation = (label.angle * 180 / Math.PI) + 90;
-    if (rotation > 90 && rotation < 270) {
-      rotation += 180;
-    }
-    const g = svg.append("g")
-      .attr("transform", `translate(${x}, ${y}) rotate(${rotation})`)
-      .attr("class", "inner-label");               
+    const centerAngle = label.angle;
+  // استخدم التعويض الزاوي لتأخير/تقديم لحظة القلب:
+const bottom = isBottomHemisphere(centerAngle - ARC_TEXT_OFFSET);
 
-    const lineHeight = 15;
-    const startY = -((label.lines.length - 1) * lineHeight) / 2;
-    label.lines.forEach((line, i) => {
-      if (line === "Funding") {
-        g.append("text")
-          .attr("x", 0)
-          .attr("y", startY + i * lineHeight - 4)
-          .attr("text-anchor", "middle")
-          .attr("dy", "0.35em")
-          .attr("fill", label.color)
-          .attr("font-size", "15px")
-          .attr("font-weight", "bold")
-          .text(line);
-      } else {
-        g.append("text")
-          .attr("x", 0)
-          .attr("y", startY + i * lineHeight)
-          .attr("text-anchor", "middle")
-          .attr("dy", "0.35em")
-          .attr("fill", label.color)
-          .attr("font-size", "13px")
-          .attr("font-weight", "bold")
-          .text(line);
+  
+    // لكل سطر في التصنيف (بعضها سطران)
+    label.lines.forEach((textLine, i) => {
+      // نوزّع الأسطر حول نصف القطر الأساسي
+      const offset = (i - (label.lines.length - 1) / 2) * lineGap;
+      let extraOffset = 10; // الإزاحة الافتراضية لكل النصوص
+
+      // إذا النص هو "Funding" نزود الإزاحة
+      if (label.lines.length === 1 && label.lines[0] === "Funding") {
+        extraOffset = 10; // أبعدها أكثر
       }
+      
+      const r = baseInnerRadius + offset + extraOffset;
+  
+      // نحدّد نطاق القوس حول زاوية المركز
+      let a0 = centerAngle - labelArcSpan / 2;
+      let a1 = centerAngle + labelArcSpan / 2;
+  
+      // لو في النصف السفلي، نعكس اتجاه القوس ليبقى النص مقروءًا
+      if (bottom) {
+        const tmp = a0; a0 = a1; a1 = tmp;
+      }
+  
+      const pathId = `inner-arc-${i}-${Math.random().toString(36).slice(2, 8)}`;
+      defs.append("path")
+        .attr("id", pathId)
+        .attr("d", arcPathD(centerX, centerY, r, a0, a1))
+        .attr("fill", "none")
+        .attr("stroke", "none");
+  
+      // حجم خط مخصص لـ "Funding" إن رغبت (اختياري)
+      const fontSize = (label.lines.length === 1 && label.lines[0] === "Funding")
+        ? Math.max(baseFontSize + 4, 15)
+        : baseFontSize;
+  
+      const textEl = svg.append("text")
+        .attr("font-size", fontSize + "px")
+        .attr("font-weight", "bold")
+        .attr("fill", label.color);
+  
+      // نربط النص بالقوس ونوسّطه عبر startOffset
+      const tp = textEl.append("textPath")
+        .attr("href", `#${pathId}`)         // SVG2
+        .attr("startOffset", "50%")         // توسيط على القوس
+        .style("text-anchor", "middle")
+        .text(textLine);
+  
+      // توافق قديم (اختياري)
+      tp.attr("xlink:href", `#${pathId}`);
     });
   });
+  
+  
 }
 
-// إنشاء خريطة جديدة للقسم الفرعي
-function createNewCircleMap(subsectionName, sectorColor) {
+function createNewCircleMap(subsectionName, sectorColor, opts = {}) {
+  const skip = opts.skipTransitions === true;
+  const mapContainer = document.querySelector('.map-container');
+
   const transitionOverlay = document.getElementById('transition-overlay');
   const concentricMap = document.getElementById('concentric-map');
-  
-  // تطبيق تأثير التصغير على الخريطة الحالية
-  concentricMap.classList.add('zoom-out');
-  
-  // الانتظار حتى يكتمل تأثير التصغير
+
+  if (!skip) {
+    concentricMap.classList.add('zoom-out');
+  }
+
   setTimeout(() => {
-    // إزالة الخريطة الحالية
-    if (svg) {
-      svg.selectAll("*").remove();
+    if (svg) svg.selectAll("*").remove();
+
+    // تحديث مركزييييب الدائرة
+
+    const cc = document.querySelector('.center-circle');
+cc.innerHTML = ''; // نظّف المحتوى
+const h3 = document.createElement('h3');
+h3.textContent = subsectionName; // ← آمن
+cc.appendChild(h3);
+
+    if (!skip) {
+      concentricMap.classList.remove('zoom-out');
+      concentricMap.classList.add('zoom-in');
     }
-    
-    // تحديث مركز الدائرة
-    document.querySelector('.center-circle').innerHTML = `
-      <h3>${subsectionName}</h3>
-    `;
-    
-    // تطبيق تأثير التكبير للخريطة الجديدة
-    concentricMap.classList.remove('zoom-out');
-    concentricMap.classList.add('zoom-in');
-    
+
     // إنشاء الخريطة الفرعية الجديدة
     const currentData = sectionDatabase[subsectionName];    
     if (!currentData) {
@@ -349,13 +414,13 @@ function createNewCircleMap(subsectionName, sectorColor) {
     const sectionLinks = sectionDatabase[subsectionName].sectionLinks;
     
     // تحديد عدد الحلقات المطلوبة بناءً على عدد الأقسام
-    const baseSectionsPerRing = 20;
+    const baseSectionsPerRing =20;
     let remainingSections = sectionNames.length;
     let dynamicRingCounts = [];
     let currentRing = 0;
 
     while (remainingSections > 0) {
-      const sectionsThisRing = baseSectionsPerRing + currentRing * 60;
+      const sectionsThisRing = baseSectionsPerRing + currentRing * 40;
       dynamicRingCounts.push(sectionsThisRing);
       remainingSections -= sectionsThisRing;
       currentRing++;
@@ -375,8 +440,21 @@ function createNewCircleMap(subsectionName, sectorColor) {
       if (actualSections === 0) break;
       sectionIndexGlobal += actualSections;
 
-      const ringInnerRadius = 75 + ringIndex * 140;
-      const ringOuterRadius = ringInnerRadius + 140;
+// ثوابت بسيطة للتحكم
+const CENTER_SAFE_RADIUS = 50;   // نصف قطر دائرة المركز (كما ترسمه لاحقًا)
+const MIN_GAP           = 8;     // مسافة أمان بين الحلقة ودائرة المركز
+const INWARD_GROW_PX    = 28;    // مقدار “سحب” الحلقة الأولى للداخل (عدّلها حسب الذوق)
+
+// حساب أنصاف الأقطار كما في كودك
+let ringInnerRadius = 120 + ringIndex * 180;
+let ringOuterRadius = ringInnerRadius + 180;
+
+// مدّ الحلقة الأقرب للمركز نحو الداخل فقط
+if (ringIndex === 0) {
+  const targetInner = ringInnerRadius - INWARD_GROW_PX;
+  ringInnerRadius = Math.max(CENTER_SAFE_RADIUS + MIN_GAP, targetInner);
+}
+
 
       if (ringIndex > 0) {
         // رسم حلقة التحديد
@@ -386,10 +464,11 @@ function createNewCircleMap(subsectionName, sectorColor) {
           .attr("r", ringOuterRadius + 5)
           .attr("fill", "none")
           .attr("stroke", "#ffd166")
-          .attr("stroke-width", 2)
+          //.attr("stroke-width", 2)
+          .attr("stroke-width", 3)
           .attr("stroke-dasharray", "5,5")
           .attr("class", "ring-highlight")
-          .attr("opacity", 0.7);
+          .attr("opacity", 0.0);
         
         svg.append("text")
           .attr("x", centerX)
@@ -400,7 +479,7 @@ function createNewCircleMap(subsectionName, sectorColor) {
           .attr("font-size", "14px")
           .attr("font-weight", "bold")
           .attr("class", "ring-label")
-          .text(`الحلقة ${ringIndex + 1}`);
+         // .text(`الحلقة ${ringIndex + 1}`);
       }
 
       const sectorAngle = (2 * Math.PI) / actualSections;
@@ -421,7 +500,8 @@ function createNewCircleMap(subsectionName, sectorColor) {
           .attr("transform", `translate(${centerX}, ${centerY})`)
           .attr("fill", sectorColor)
           .attr("stroke", "white")
-          .attr("stroke-width", 1)
+          .attr("stroke-width", 2)
+          //.attr("stroke-width", 1)
           .attr("opacity", 0.8)
           .attr("class", "subsection-item")
           .attr("data-section", sectionIndex)
@@ -452,25 +532,38 @@ function createNewCircleMap(subsectionName, sectorColor) {
         const g = svg.append("g")
           .attr("transform", `translate(${x}, ${y}) rotate(${rotation})`)
           .attr("class", "subsection-label");
-        
-        const text = g.append("text")
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr("text-anchor", "middle")
-          .attr("dy", "0.35em")
-          .attr("font-size", ringIndex > 0 ? "8px" : "9px")
-          .attr("font-weight", "bold")
-          .text(sectionNames[sectionIndex]);
-        
-        if (sectionLinks[sectionIndex]) {
-          text.attr("fill", "#ffd166")
-            .attr("class", "clickable-text")
-            .on("click", function() {
-              window.open(sectionLinks[sectionIndex], '_blank');
-            });
-        } else {
-          text.attr("fill", "#ffffff");
-        }
+          const fontSize = ringIndex > 0 ? 12 : 10;     
+          const lineHeight = Math.round(fontSize * 1);
+          
+          // العرض المتاح للنص على القوس تقريبياً = طول القوس عند نصف القطر
+        //  const availableWidth = (endAngle - startAngle) * textRadius * 2.1; // هوامش 10%
+          // قبل:
+// const availableWidth = (endAngle - startAngle) * textRadius * 2.1;
+
+// بعد (اضبط العوامل كما تحب):
+const arcLen = (endAngle - startAngle) * textRadius;
+const widthFactor = (ringIndex === 0) ? 1.7 : 1.7; // الحلقة الأولى أوسع قليلًا، الثانية أضيق
+const availableWidth = arcLen * widthFactor;
+
+
+
+          const label = g.append("text")
+            .attr("x", 0)
+            .attr("text-anchor", "middle")
+            .attr("font-weight", "bold");
+          
+          // لفّ النص لعدة أسطر حسب العرض المتاح
+          wrapSvgText(label, availableWidth, lineHeight, fontSize, sectionNames[sectionIndex]);
+          
+          // الألوان والتصرف عند النقر
+          if (sectionLinks[sectionIndex]) {
+            label.selectAll("tspan")
+              .attr("fill", "#ffffff")
+              .style("cursor", "pointer")
+              .on("click", () => window.open(sectionLinks[sectionIndex], "_blank"));
+          } else {
+            label.selectAll("tspan").attr("fill", "#ffffff");
+          }
       }
     }
     
@@ -481,16 +574,17 @@ function createNewCircleMap(subsectionName, sectorColor) {
       .attr("fill", "none")
       .attr("stroke", "rgba(255, 255, 255, 0.2)")
       .attr("stroke-dasharray", "5,5")
-      .attr("stroke-width", 1);
-    
+     // .attr("stroke-width", 1);
+     .attr("stroke-width", 3);
     activeSection = subsectionName;
     
-    // إخفاء شاشة الانتقال بعد انتهاء التأثير
-    setTimeout(() => {
-      concentricMap.classList.remove('zoom-in');
-      transitionOverlay.classList.remove('active');
-    }, 500);
-  }, 400);
+    if (!skip) {
+      setTimeout(() => {
+        concentricMap.classList.remove('zoom-in');
+        transitionOverlay.classList.remove('active');
+      }, 500);
+    }
+  }, skip ? 0 : 400);
 }
 
 // العودة إلى الخريطة الرئيسية
@@ -510,8 +604,11 @@ function transitionBackToMain() {
     
     // تحديث مركز الدائرة
     document.querySelector('.center-circle').innerHTML = `
-      <h3>سوريا</h3>
-      <p>المركز الرئيسي</p>
+      <h3>Syrian Startup Ecosystem Map
+      </h3>
+      
+      <p> 
+     </p>
     `;
     
     // تطبيق تأثير التكبير للخريطة الرئيسية
@@ -540,9 +637,116 @@ function rotateMap(direction) {
   drawMap();
 }
 
+let resizeRaf = null;
+
+function handleResize() {
+
+  if (activeSection) {
+    const sectorColor = sectionDatabase[activeSection]?.sectorColor || "#4ca1af";
+    createNewCircleMap(activeSection, sectorColor, { skipTransitions: true });
+  } else {
+    drawMap();
+  }
+}
+
 window.addEventListener('resize', () => {
-  const bounds = document.getElementById('concentric-map').getBoundingClientRect();
-  centerX = bounds.width / 2;
-  centerY = bounds.height / 2;
-  drawMap(); // أو إعادة إنشاء الخريطة بناءً على المتغيرات الجديدة
+  if (resizeRaf) return;
+  resizeRaf = requestAnimationFrame(() => {
+    resizeRaf = null;
+    handleResize();
+  });
 });
+
+function wrapSvgText(textSel, maxWidthPx, lineHeightPx, fontSizePx, rawText) {
+  const words = (rawText || "").trim().split(/\s+/).reverse();
+  if (!words.length) return;
+
+
+  textSel.text(null)
+         .attr("font-size", fontSizePx + "px")
+         .attr("text-anchor", "middle");
+
+  let line = [];
+  let tspan = textSel.append("tspan").attr("x", 0).attr("dy", "0em");
+
+  let word;
+  while ((word = words.pop())) {
+    line.push(word);
+    tspan.text(line.join(" "));
+    // قياس العرض الحقيقي للنص الحالي
+    if (tspan.node().getComputedTextLength() > maxWidthPx) {
+      line.pop();
+      tspan.text(line.join(" "));
+      line = [word];
+      tspan = textSel.append("tspan")
+                     .attr("x", 0)
+                     .attr("dy", lineHeightPx + "px")
+                     .text(word);
+    }
+  }
+
+
+  const tspans = textSel.selectAll("tspan").nodes();
+  const totalLines = tspans.length;
+  const shiftY = -((totalLines - 1) * lineHeightPx) / 2;
+  textSel.attr("y", shiftY);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

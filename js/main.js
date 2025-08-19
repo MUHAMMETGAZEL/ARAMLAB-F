@@ -1,4 +1,4 @@
-// متغيرات عامة
+
 let sectionDatabase = {};
 const sectionCount = 8;
 const lastSaveTimeElement = document.getElementById('last-save-time');
@@ -7,50 +7,161 @@ let rotationAngle = 0;
 let nestingLevel = 0;
 const MAX_NESTING_LEVEL = 1;
 
-// تهيئة التطبيق
+
+
+// About Us modal handlers
+document.getElementById('about-link')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('about-modal')?.classList.add('active');
+});
+
+document.getElementById('close-about-modal')?.addEventListener('click', () => {
+  document.getElementById('about-modal')?.classList.remove('active');
+});
+document.getElementById('close-about-btn')?.addEventListener('click', () => {
+  document.getElementById('about-modal')?.classList.remove('active');
+});
+
+// إغلاق بالنقر خارج المحتوى
+document.getElementById('about-modal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'about-modal') {
+    e.currentTarget.classList.remove('active');
+  }
+});
+
+
+// Contact Us modal handlers
+document.getElementById('contact-link')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('contact-modal')?.classList.add('active');
+});
+
+document.getElementById('close-contact-modal')?.addEventListener('click', () => {
+  document.getElementById('contact-modal')?.classList.remove('active');
+});
+document.getElementById('close-contact-btn')?.addEventListener('click', () => {
+  document.getElementById('contact-modal')?.classList.remove('active');
+});
+
+// إغلاق عند النقر خارج المحتوى
+document.getElementById('contact-modal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'contact-modal') {
+    e.currentTarget.classList.remove('active');
+  }
+});
+
+
+// إخفاء الأزرار الإدارية افتراضيًا
+document.getElementById('add-section').classList.add('hidden');
+document.getElementById('edit-section').classList.add('hidden');
+document.getElementById('view-suggestions').classList.add('hidden');
+function updateFooterVisibility() {
+  const footer = document.querySelector('.footer');
+  if (!footer) return;
+  footer.style.display = (window.isAdmin === true) ? 'block' : 'none';
+}
+/*
+// تعديل دالة updateLicenseUI
+function updateLicenseUI() {
+  if (licenseActive) {
+    document.getElementById('add-section').classList.remove('hidden');
+    document.getElementById('add-section').classList.add('flex'); // إذا تحتاج flex
+    document.getElementById('edit-section').classList.remove('hidden');
+document.getElementById('edit-section').classList.add('flex'); // إذا تحتاج flex
+document.getElementById('view-suggestions').classList.remove('hidden');
+document.getElementById('view-suggestions').classList.add('flex'); // إذا تحتاج flex
+  } else {
+    document.getElementById('add-section').classList.add('hidden');
+    document.getElementById('edit-section').classList.add('hidden');
+    document.getElementById('view-suggestions').classList.add('hidden');
+  }
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+async function fetchUserRole() {
+  try {
+    const response = await fetch('http://localhost:5001/api/auth/verify', {
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      //console.warn('التحقق من صلاحية المستخدم فشل');
+      return null;
+    }
+
+    const data = await response.json();
+    return data.user?.role || null;
+  } catch (error) {
+    //console.error('فشل في التحقق من صلاحية المستخدم:', error);
+    return null;
+  }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+  licenseActive = false;
+
+  const userRole = await fetchUserRole();
+  if (userRole !== 'admin') {
+    const adminButtons = document.querySelectorAll('.admin-only');
+    adminButtons.forEach(btn => btn.style.display = 'none');
+    window.isAdmin = false;
+  } else {
+    window.isAdmin = true;
+  }
+  updateFooterVisibility();
+  await initApp(); // تشغيل التطبيق بعد تحديد صلاحية المستخدم
+});
+
 async function initApp() {
-  // تحميل حالة الترخيص
-  loadLicenseStatus();
-  
-  // تحميل البيانات
   await loadData();
-  
-  // إعداد تحديثات الوقت الحقيقي
   setupRealtimeUpdates();
-  
-  // إعداد واجهة المستخدم
   updateLicenseUI();
+  
   initMap();
-  
-  // إعداد مستمعات الأحداث
   setupEventListeners();
-  
-  // حفظ دوري للبيانات
+
   setInterval(() => {
     if (Object.keys(sectionDatabase).length > 0) {
       saveDataLocally();
     }
   }, 30000);
+  
 }
+
+
+
+
+
 
 
 async function loadData() {
   try {
-    // ✅ دائماً حمّل من الخادم
+
     const data = await ApiClient.getData();
     sectionDatabase = data || {};
     ensureAllSectionsExist();
     saveDataLocally();
 
-    // ✅ تحديث الوقت الظاهر للمستخدم
+    
     const now = new Date();
     lastSaveTimeElement.textContent = now.toLocaleTimeString('ar-SA');
 
     return true;
   } catch (error) {
-    console.error('❌ خطأ في تحميل البيانات من الخادم:', error);
+   // console.error('❌ خطأ في تحميل البيانات من الخادم:', error);
 
-    // ✅ في حال فشل التحميل، استخدم البيانات المحلية
     try {
       const localData = localStorage.getItem('innovationMapData');
       if (localData) {
@@ -65,10 +176,9 @@ async function loadData() {
         return true;
       }
     } catch (parseError) {
-      console.error('❌ خطأ في تحليل البيانات المحلية:', parseError);
+     // console.error('❌ خطأ في تحليل البيانات المحلية:', parseError);
     }
 
-    // إذا فشل كل شيء، استخدم قاعدة بيانات فارغة
     await initializeDatabase();
     return false;
   }
@@ -76,19 +186,6 @@ async function loadData() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// تأكد من وجود جميع الأقسام في قاعدة البيانات
 function ensureAllSectionsExist() {
   let hasChanges = false;
   sectors.forEach(sector => {
@@ -109,7 +206,7 @@ function ensureAllSectionsExist() {
   }
 }
 
-// حفظ البيانات محلياً
+
 function saveDataLocally() {
   try {
     const dataToSave = {
@@ -121,12 +218,12 @@ function saveDataLocally() {
     updateLastSaveTime();
     return true;
   } catch (error) {
-    console.error('خطأ في الحفظ المحلي:', error);
+   // console.error('خطأ في الحفظ المحلي:', error);
     return false;
   }
 }
 
-// حفظ البيانات في الخادم و localStorage
+
 async function saveData() {
   try {
     const localSaved = saveDataLocally();
@@ -135,7 +232,7 @@ async function saveData() {
       await ApiClient.saveData(sectionDatabase);
       return true;
     } catch (error) {
-      console.error('خطأ في الحفظ في الخادم:', error);
+     // console.error('خطأ في الحفظ في الخادم:', error);
       if (localSaved) {
         showNotification('تم الحفظ محلياً', 'تم حفظ البيانات في التخزين المحلي فقط');
         return true;
@@ -143,12 +240,11 @@ async function saveData() {
       return false;
     }
   } catch (error) {
-    console.error("خطأ عام في حفظ البيانات:", error);
+  //  console.error("خطأ عام في حفظ البيانات:", error);
     return false;
   }
 }
 
-// تهيئة قاعدة البيانات
 async function initializeDatabase() {
   sectors.forEach(sector => {
     sector.subsections.forEach(subsection => {
@@ -162,11 +258,9 @@ async function initializeDatabase() {
   await saveData();
 }
 
-// إعداد تحديثات الوقت الحقيقي
 function setupRealtimeUpdates() {
   setInterval(async () => {
-      const token = localStorage.getItem('token');
-    if (!token) return;
+    
     
     try {
       const newData = await ApiClient.getData();
@@ -183,36 +277,35 @@ function setupRealtimeUpdates() {
         saveDataLocally();
       }
     } catch (error) {
-      console.error('خطأ في التحديثات الفورية:', error);
+     // console.error('خطأ في التحديثات الفورية:', error);
     }
   }, 30000);
 }
 
-// إعداد مستمعات الأحداث
 function setupEventListeners() {
-  // مركز الخريطة
+
   document.querySelector('.center-circle').addEventListener('click', transitionBackToMain);
   
-  // أزرار التحكم
+
   document.getElementById('reset-view').addEventListener('click', transitionBackToMain);
   document.getElementById('rotate-left').addEventListener('click', () => rotateMap(-1));
   document.getElementById('rotate-right').addEventListener('click', () => rotateMap(1));
-  
-  // الترخيص
+ 
   setupLicenseListeners();
-  
-  // النوافذ المنبثقة
+ 
   setupModalListeners();
-  
-  // حفظ قبل إغلاق النافذة
+
   window.addEventListener('beforeunload', saveDataLocally);
 }
 
-// وظيفة تحديث وقت الحفظ الأخير
 function updateLastSaveTime() {
   const now = new Date();
   document.getElementById('last-save-time').textContent = now.toLocaleTimeString('ar-SA');
 }
 
-// بدء التطبيق عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', initApp);
+
+
+
+
+
+
