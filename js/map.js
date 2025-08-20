@@ -358,7 +358,7 @@ const bottom = isBottomHemisphere(centerAngle - ARC_TEXT_OFFSET);
       const tp = textEl.append("textPath")
         .attr("href", `#${pathId}`)         // SVG2
         .attr("startOffset", "50%")         // توسيط على القوس
-        .style("text-anchor", "middle")
+        .attr("text-anchor", "middle")
         .text(textLine);
   
       // توافق قديم (اختياري)
@@ -559,7 +559,7 @@ const availableWidth = arcLen * widthFactor;
           if (sectionLinks[sectionIndex]) {
             label.selectAll("tspan")
               .attr("fill", "#ffffff")
-              .style("cursor", "pointer")
+              .classed("cursor-pointer", true)
               .on("click", () => window.open(sectionLinks[sectionIndex], "_blank"));
           } else {
             label.selectAll("tspan").attr("fill", "#ffffff");
