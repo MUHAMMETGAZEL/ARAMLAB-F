@@ -676,7 +676,11 @@ function wrapSvgText(textSel, maxWidthPx, lineHeightPx, fontSizePx, rawText) {
     line.push(word);
     tspan.text(line.join(" "));
     // قياس العرض الحقيقي للنص الحالي
-    if (tspan.node().getComputedTextLength() > maxWidthPx) {
+    if (
+ line.length >= 3 ||
+   //   tspan.node().getComputedTextLength() >= maxWidthPx * 0.4 ||
+
+tspan.node().getComputedTextLength() > maxWidthPx) {
       line.pop();
       tspan.text(line.join(" "));
       line = [word];
