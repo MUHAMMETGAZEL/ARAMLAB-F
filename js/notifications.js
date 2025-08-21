@@ -6,7 +6,7 @@ function showNotification(title, message) {
     titleElement.textContent = title;
     messageElement.textContent = message;
    notification.classList.add('is-visible');
-setTimeout(()=>{ notification.classList.remove('is-visible'); }, 3000);
+setTimeout(()=>{ notification.classList.remove('is-visible'); }, 7000);
 }
 
 // تحديث وقت آخر حفظ
