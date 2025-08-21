@@ -577,7 +577,8 @@ const availableWidth = arcLen * widthFactor;
      // .attr("stroke-width", 1);
      .attr("stroke-width", 3);
     activeSection = subsectionName;
-    
+    setRotationVisible(false);
+
     if (!skip) {
       setTimeout(() => {
         concentricMap.classList.remove('zoom-in');
@@ -619,9 +620,10 @@ function transitionBackToMain() {
     nestingLevel = 0;
     rotationAngle = 0;
     drawMap();
-    const rc = document.getElementById('rotation-controls');
+ /*   const rc = document.getElementById('rotation-controls');
 rc.classList.remove('hidden');
-rc.classList.add('flex');
+rc.classList.add('flex');*/
+setRotationVisible(true);
     activeSection = null;
     
     // إخفاء شاشة الانتقال بعد انتهاء التأثير
@@ -630,6 +632,12 @@ rc.classList.add('flex');
       transitionOverlay.classList.remove('active');
     }, 500);
   }, 800);
+}
+
+
+function updateRotationControlsVisibility() {
+  // تظهر فقط لما نكون على الخريطة الأساسية (ما في activeSection)
+  setRotationVisible(!activeSection);
 }
 
 // تدوير الخريطة
