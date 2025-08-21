@@ -561,11 +561,11 @@ body {
 
 .team-title {
     text-align: center;
-    color: #ffd166;
+    color: #ffff;
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 30px;
-    text-shadow: 0 0 15px rgba(255, 209, 102, 0.7);
+    text-shadow: 0 0 15px #67cada;
 }
 
 .team-grid {
