@@ -99,6 +99,11 @@ document.getElementById('view-suggestions').classList.add('flex'); // إذا ت�
 
 
 
+function setRotationVisible(isVisible) {
+  const rc = document.getElementById('rotation-controls');
+  if (!rc) return;
+  rc.classList.toggle('hidden', !isVisible);
+}
 
 
 
