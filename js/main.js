@@ -42,6 +42,40 @@ aboutModal?.addEventListener('click', (e) => {
   if (e.target === aboutModal) closeAbout();
 });
 
+
+
+
+// Privacy Policy modal handlers
+document.getElementById('privacy-link')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  const modal = document.getElementById('privacy-modal');
+  if (!modal) return;
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  // تركيز على زر الإغلاق لتحسين الوصول
+  document.getElementById('close-privacy-btn')?.focus();
+});
+
+function closePrivacyModal() {
+  const modal = document.getElementById('privacy-modal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  // إعادة التركيز إلى رابط الفوتر
+  document.getElementById('privacy-link')?.focus();
+}
+
+document.getElementById('close-privacy-modal')?.addEventListener('click', closePrivacyModal);
+document.getElementById('close-privacy-btn')?.addEventListener('click', closePrivacyModal);
+
+// إغلاق بالنقر على خلفية المودال
+document.getElementById('privacy-modal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'privacy-modal') closePrivacyModal();
+});
+
+
+
+
 // Contact Us modal handlers
 document.getElementById('contact-link')?.addEventListener('click', (e) => {
   e.preventDefault();
