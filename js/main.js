@@ -8,27 +8,39 @@ let nestingLevel = 0;
 const MAX_NESTING_LEVEL = 1;
 
 
+const aboutModal = document.getElementById('about-modal');
+const aboutOpenBtn = document.getElementById('about-link');
+const aboutCloseX = document.getElementById('close-about-modal');
+const aboutCloseBtn = document.getElementById('close-about-btn');
+let aboutTrigger = null;
 
-// About Us modal handlers
-document.getElementById('about-link')?.addEventListener('click', (e) => {
-  e.preventDefault();
-  document.getElementById('about-modal')?.classList.add('active');
-});
+function openAbout(e) {
+  if (e) e.preventDefault();
+  aboutTrigger = e?.currentTarget || aboutTrigger;
+  aboutModal.classList.add('active');
+  aboutModal.setAttribute('aria-hidden', 'false');
+  aboutCloseX?.focus();
+}
 
-document.getElementById('close-about-modal')?.addEventListener('click', () => {
-  document.getElementById('about-modal')?.classList.remove('active');
-});
-document.getElementById('close-about-btn')?.addEventListener('click', () => {
-  document.getElementById('about-modal')?.classList.remove('active');
-});
-
-// إغلاق بالنقر خارج المحتوى
-document.getElementById('about-modal')?.addEventListener('click', (e) => {
-  if (e.target.id === 'about-modal') {
-    e.currentTarget.classList.remove('active');
+function closeAbout() {
+  
+  if (document.activeElement && aboutModal.contains(document.activeElement)) {
+    document.activeElement.blur();
   }
-});
+  aboutModal.classList.remove('active');
+  aboutModal.setAttribute('aria-hidden', 'true');
+  
+  if (aboutTrigger && typeof aboutTrigger.focus === 'function') {
+    aboutTrigger.focus();
+  }
+}
 
+aboutOpenBtn?.addEventListener('click', openAbout);
+aboutCloseX?.addEventListener('click', closeAbout);
+aboutCloseBtn?.addEventListener('click', closeAbout);
+aboutModal?.addEventListener('click', (e) => {
+  if (e.target === aboutModal) closeAbout();
+});
 
 // Contact Us modal handlers
 document.getElementById('contact-link')?.addEventListener('click', (e) => {
