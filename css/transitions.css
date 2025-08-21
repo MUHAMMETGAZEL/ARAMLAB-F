@@ -103,7 +103,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 3000;
     display: none;
-    animation: slideIn 0.5s forwards, fadeOut 0.5s forwards 2.5s;
+    animation: slideIn 0.5s forwards, fadeOut 0.5s forwards 7s;
     max-width: 350px;
 }
 
