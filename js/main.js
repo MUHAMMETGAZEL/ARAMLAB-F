@@ -48,64 +48,6 @@ aboutModal?.addEventListener('click', (e) => {
 
 
 
-// مساعد عام لفتح/إغلاق المودالات مع إدارة الوصولية (ARIA) والتركيز
-function openModal(modalEl, openerElToRestoreFocus, focusInsideSelector = '.close-btn, .form-btn') {
-  if (!modalEl) return;
-  modalEl.classList.add('active');
-  modalEl.setAttribute('aria-hidden', 'false');
-
-  // خزّن العنصر الذي فتح النافذة لإرجاع التركيز إليه لاحقًا
-  modalEl.__opener = openerElToRestoreFocus || document.activeElement;
-
-  // انقل التركيز لزر إغلاق داخل المودال (أو أول عنصر قابل للتركيز)
-  const focusTarget = modalEl.querySelector(focusInsideSelector) || modalEl.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-  focusTarget?.focus();
-}
-
-function closeModal(modalEl) {
-  if (!modalEl) return;
-
-  // 1) أعد التركيز إلى الزر/الرابط الذي فتح المودال
-  modalEl.__opener?.focus();
-
-  // 2) أخفِ المودال بصريًا
-  modalEl.classList.remove('active');
-
-  // 3) أخفِه دلاليًا لبرامج القراءة
-  modalEl.setAttribute('aria-hidden', 'true');
-}
-
-
-const aboutUsLink = document.getElementById('about-link');      // عدّل الـ id حسب زرّك الفعلي
-const abouttModal = document.getElementById('aboutt-modal');
-document.getElementById('close-aboutt-modal')?.addEventListener('click', () => closeModal(abouttModal));
-document.getElementById('close-aboutt-btn')?.addEventListener('click', () => closeModal(abouttModal));
-abouttModal?.addEventListener('click', (e) => { if (e.target.id === 'aboutt-modal') closeModal(abouttModal); });
-
-aboutUsLink?.addEventListener('click', (e) => {
-  e.preventDefault();
-  openModal(abouttModal, aboutUsLink, '#close-aboutt-btn');
-});
-
-
-const aboutMapLink = document.getElementById('about-link');
-const aboutModal   = document.getElementById('about-modal');
-document.getElementById('close-about-modal')?.addEventListener('click', () => closeModal(aboutModal));
-document.getElementById('close-about-btn')?.addEventListener('click', () => closeModal(aboutModal));
-aboutModal?.addEventListener('click', (e) => { if (e.target.id === 'about-modal') closeModal(aboutModal); });
-
-aboutMapLink?.addEventListener('click', (e) => {
-  e.preventDefault();
-  openModal(aboutModal, aboutMapLink, '#close-about-btn');
-});
-
-
-
-
-
-
-
-
 
 
 
