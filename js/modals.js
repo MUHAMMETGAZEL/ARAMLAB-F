@@ -240,9 +240,9 @@ async function loadSuggestions() {
    /* console.log("🚀 بيانات الاقتراحات:", data);*/
     if (!data || Object.keys(data).length === 0) {
       suggestionsList.innerHTML = `
-        <div class="no-suggestions">
+        <div class="no-suggestions" dir="ltr">
           <i class="fas fa-inbox"></i>
-          <p>لا توجد اقتراحات متاحة حالياً</p>
+          <p dir="ltr">No suggestions available at the moment</p>
         </div>
       `;
       return;
