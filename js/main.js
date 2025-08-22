@@ -45,6 +45,29 @@ aboutModal?.addEventListener('click', (e) => {
 
 
 
+// About Us modal handlers
+document.getElementById('aboutt-link')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('aboutt-modal')?.classList.add('active');
+});
+
+document.getElementById('close-aboutt-modal')?.addEventListener('click', () => {
+  document.getElementById('aboutt-modal')?.classList.remove('active');
+});
+document.getElementById('close-aboutt-btn')?.addEventListener('click', () => {
+  document.getElementById('aboutt-modal')?.classList.remove('active');
+});
+
+// إغلاق بالنقر خارج المحتوى
+document.getElementById('aboutt-modal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'aboutt-modal') {
+    e.currentTarget.classList.remove('active');
+  }
+});
+
+
+
+
 // Privacy Policy modal handlers
 document.getElementById('privacy-link')?.addEventListener('click', (e) => {
   e.preventDefault();
