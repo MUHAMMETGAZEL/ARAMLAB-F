@@ -196,7 +196,7 @@ function drawMap() {
             .attr("stroke-width", 3)
            // .attr("stroke-width", 1)
             .attr("opacity", 0.8)
-            .attr("class", "subsection")
+            .attr("class", "subsection outer-clickable")
             .attr("data-sector", sector.id)
             .attr("data-subsection", i)
             .on("mouseover", function() {
