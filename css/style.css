@@ -180,6 +180,7 @@ body {
 
 .center-circle h3 {
     font-size: 1rem;
+    padding: 2px;
     /*margin-bottom: 5px;*/
     color: #ffd166;
 }
