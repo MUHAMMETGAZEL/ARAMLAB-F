@@ -1,6 +1,13 @@
 
 #concentric-map .outer-clickable { cursor: pointer; }
 
+.aboutt-modal-body a {
+    color: #3ae3ff;
+    text-decoration: none;
+}
+
+
+
 .cursor-pointer { cursor: pointer; }
 .notification { 
   display: none;
