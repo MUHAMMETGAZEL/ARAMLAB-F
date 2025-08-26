@@ -55,23 +55,23 @@ html, body {
 
   /* روابط داخل نوافذ المودال (About / Contact) */
 .modal .about-modal-body a {
-    color: #3ae3ff;                /* اجعلها بيضاء بدل الأزرق */
-    text-decoration: none;      /* أزل الخط السفلي */
+    color: #3ae3ff;              
+    text-decoration: none;      
   }
   
   .modal .about-modal-body a:visited {
-    color: #fff;                /* لا تتحول إلى بنفسجي بعد الزيارة */
+    color: #3ae3ff;              
   }
   
   .modal .about-modal-body a:hover,
   .modal .about-modal-body a:focus {
-    text-decoration: none;      /* إن رغبت بإظهار تفاعل: ضع underline هنا بدل none */
-    opacity: 0.95;              /* لمسة خفيفة عند المرور */
-    outline: none;              /* إزالة إطار التركيز الافتراضي */
+    text-decoration: none;   
+    opacity: 0.95;             
+    outline: none;              
   }
   
   .modal .about-modal-body a:focus-visible {
-    outline: 2px solid rgba(255,255,255,0.6); /* إمكانية وصول: وميض تركيز واضح بدون تغيير اللون */
+    outline: 2px solid rgba(255,255,255,0.6);
     outline-offset: 2px;
   }
   
@@ -342,7 +342,7 @@ body {
     position: relative;
     transform: translateY(-20px);
     transition: all 0.4s ease;
-    overflow-y: auto;/* اجعل المحتوى الداخلي هو من يقرر التمرير */
+    overflow-y: auto;
   display: flex;
   margin: 5% auto;
   flex-direction: column;
@@ -698,10 +698,10 @@ font-size: 1.3rem;
     border-color: #ea4335;
 }
 .suggestions-container {
-    max-height: 60vh; /* ارتفاع مناسب لا يتجاوز 60% من الشاشة */
-    overflow-y: auto; /* السماح بالتمرير العمودي */
-    padding-right: 10px; /* تحسين التمرير عند الاتجاه من اليمين لليسار */
-    direction: rtl; /* لأن النص عربي */
+    max-height: 60vh; 
+    overflow-y: auto;
+    padding-right: 10px; 
+    direction: rtl; 
   }
   
 /* أنماط إضافية للنافذة المنبثقة */
