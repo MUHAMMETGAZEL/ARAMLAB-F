@@ -300,7 +300,10 @@
         link1:"info@aramlab.info",
         link2:"http://aramlab.info",
         link3:"Aram Lab",
-   
+         name1:"محمد غزال",
+        name2:"نورس ابراهيم",
+        name3:"حازم سعيد",
+        name4:"تيماء دشلي",
    
     },
     };
@@ -387,6 +390,7 @@
   });
 
 })();
+
 
 
 
