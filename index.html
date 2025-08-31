@@ -48,19 +48,19 @@
     <div class="header">
        <!--  <h1>خريطة منظومة الشركات الناشئة في سوريا</h1> 
         <h2>Syrian Startup Ecosystem Map</h2>-->
-        <h1>Syrian Startup Ecosystem Map  </h1> 
+        <h1 data-i18n="title">Syrian Startup Ecosystem Map  </h1> 
     </div>
     
 
 
     <div class="controls">
-        <button class="control-btn" id="reset-view">
+        <button class="control-btn" id="reset-view" data-i18n="btnReset" >
             <i class="fas fa-sync-alt"></i> Reset View
         </button>
-        <button class="control-btn admin-only" id="add-section">
+        <button class="control-btn admin-only" id="add-section" data-i18n="btnAdd">
             <i class="fas fa-plus-circle"></i> Add New Section
         </button>
-        <button class="control-btn admin-only" id="edit-section">
+        <button class="control-btn admin-only" id="edit-section"  data-i18n="btnEdit">
             <i class="fas fa-edit"></i> Edit Sections
         </button>
         
@@ -73,23 +73,23 @@
             </div>
         </div>
 
-        <button class="control-btn admin-only suggestions-btn hidden" id="view-suggestions">
+        <button class="control-btn admin-only suggestions-btn hidden" id="view-suggestions" data-i18n="btnSuggestions">
             <i class="fas fa-list-alt"></i> Suggestions
         </button>
         
       
-        <button class="control-btn suggest-btn" id="suggest-company" >
+        <button class="control-btn suggest-btn" id="suggest-company" data-i18n="btnSuggest" >
             <i class="fas fa-lightbulb"></i> Suggest an Organization
         </button>
-<button id="about-link" class="control-btn">About The Map</button>
-
+<button id="about-link" class="control-btn" data-i18n="btnAboutMap">About The Map</button>
+<button class="control-btn" id="toggle-lang" data-i18n-alt="toggleToAr">AR</button>
 
     </div>
     
     <div class="modal" id="suggestions-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">List of submitted suggestions</h3>
+                <h3 class="modal-title" data-i18n="suggestionStitle">List of submitted suggestions</h3>
                 <button class="close-btn" id="close-suggestions-modal">
                     <i class="fas fa-times"></i>
                 </button>
@@ -100,7 +100,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button class="form-btn secondary" id="close-suggestions-btn">
+                <button class="form-btn secondary" id="close-suggestions-btn" data-i18n="commonclose">
                     <i class="fas fa-times"></i> Close 
                 </button>
             </div>
@@ -113,77 +113,77 @@
     <div class="modal" id="suggest-company-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Suggest a New Organization</h3>
+                <h3 class="modal-title" data-i18n="suggestTitle" >Suggest a New Organization</h3>
                 <button class="close-btn" id="close-suggest-modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <form class="suggestion-form">
                 <div class="form-group">
-                    <label for="company-name">Organization  Name * </label>
-                    <input type="text" id="company-name" required placeholder="Enter the Organization Name">
+                    <label for="company-name"  data-i18n="suggestNameLabel" >Organization  Name * </label>
+                    <input type="text" id="company-name"  data-i18n="suggestNamePh" required placeholder="Enter the Organization Name">
                 </div>
                 
                 <div class="form-group">
-                    <label for="company-field">Organization Type *</label>
+                    <label for="company-field" data-i18n="suggestTypeLabel">Organization Type *</label>
                     <select id="company-field" required>
-                        <option value="">Select Organization Type</option>
+                        <option value=""  data-i18n="suggestTypePh" >Select Organization Type</option>
                       
 
 
-<option value="Incubators">Incubators</option>
-<option value="Accelerators">Accelerators</option>
-<option value="Venture Studios">Venture Studios</option>
-<option value="Competitions">Competitions</option>
-<option value="Mentorship Programs">Mentorship Programs</option>
-<option value="Academic Institutions">Academic Institutions</option>
-<option value="Talent Development Organizations">Talent Development Organizations</option>
-<option value="Co-working Spaces">Co-working Spaces</option>
-<option value="Research and Development, Labs">Research and Development, Labs</option>
-<option value="Startup Hiring Companies">Startup Hiring</option>
-<option value="Startup Accounting Companies">Startup Accounting</option>
-<option value="Startup Marketing Companies">Startup Marketing</option>
-<option value="Women's Support">Women's Support</option>
-<option value="Governmental Support">Governmental Support</option>
-<option value="Legal Support">Legal Support</option>
-<option value="Banks">Banks</option>
-<option value="Media Support">Media Support</option>
-<option value="Events">Events</option>
-<option value="NGOs">NGOs</option>
-<option value="Startup Podcasts">Startup Podcasts</option>
-<option value="Prizes">Awards</option>
-<option value="Development Financial Institutions">Development Financial Institutions</option>
-<option value="Fund of Funds">Fund of Funds</option>
-<option value="Family Offices">Family Offices</option>
-<option value="Crowdfunding">Crowdfunding</option>
-<option value="Angel Investors">Angel Investors</option>
-<option value="Private Equity Funds">Private Equity Funds</option>
-<option value="Venture Capitals">Venture Capitals</option>
+<option value="Incubators" data-i18n="optIncubators">Incubators</option>
+<option value="Accelerators" data-i18n="optAccelerators" >Accelerators</option>
+<option value="Venture Studios" data-i18n="optVentureStudios">Venture Studios</option>
+<option value="Competitions"data-i18n="optCompetitions">Competitions</option>
+<option value="Mentorship Programs" data-i18n="optMentorship">Mentorship Programs</option>
+<option value="Academic Institutions"  data-i18n="optAcademic">Academic Institutions</option>
+<option value="Talent Development Organizations" data-i18n="optTalentDev">Talent Development Organizations</option>
+<option value="Co-working Spaces" data-i18n="optCowork">Co-working Spaces</option>
+<option value="Research and Development, Labs" data-i18n="optrndLabs" >Research and Development, Labs</option>
+<option value="Startup Hiring Companies" data-i18n="optstartupHiring">Startup Hiring</option>
+<option value="Startup Accounting Companies"data-i18n="optstartupAccounting">Startup Accounting</option>
+<option value="Startup Marketing Companies"data-i18n="optstartupMarketing">Startup Marketing</option>
+<option value="Women's Support"data-i18n="optwomenSupport">Women's Support</option>
+<option value="Governmental Support"data-i18n="optgovSupport">Governmental Support</option>
+<option value="Legal Support"data-i18n="optlegalSupport">Legal Support</option>
+<option value="Banks" data-i18n="optbanks">Banks</option>
+<option value="Media Support"data-i18n="optmediaSupport">Media Support</option>
+<option value="Events" data-i18n="optevents" >Events</option>
+<option value="NGOs"  data-i18n="optngos">NGOs</option>
+<option value="Startup Podcasts" data-i18n="optpodcasts">Startup Podcasts</option>
+<option value="Prizes" data-i18n="optawards">Awards</option>
+<option value="Development Financial Institutions"data-i18n="optdfi">Development Financial Institutions</option>
+<option value="Fund of Funds" data-i18n="optfof" >Fund of Funds</option>
+<option value="Family Offices"data-i18n="optfamilyOffices">Family Offices</option>
+<option value="Crowdfunding" >Crowdfunding</option>
+<option value="Angel Investors" data-i18n="optcrowdfunding">Angel Investors</option>
+<option value="Private Equity Funds" data-i18n="optpe">Private Equity Funds</option>
+<option value="Venture Capitals"data-i18n="optvc">Venture Capitals</option>
 
 
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="company-description">Organization Description *</label>
-                    <textarea id="company-description" required placeholder="Enter a brief description about the organization and its activities"></textarea>
+                    <label for="company-description"  data-i18n="suggestdescLabel" >Organization Description *</label>
+                    <textarea id="company-description" required data-i18n="suggestdescPh" placeholder="Enter a brief description about the organization and its activities"></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label for="company-location">Organization Location *</label>
-                    <input type="text" id="company-location" required placeholder="City and area (e.g., Damascus, Mazzeh)">
+                    <label for="company-location"  data-i18n="suggestlocLabel">Organization Location *</label>
+                    <input type="text" id="company-location" data-i18n="suggestlocPh" required placeholder="City and area (e.g., Damascus, Mazzeh)">
                 </div>
                 
                 <div class="form-group">
-                    <label for="company-website">Website or Social Media Link (optional)</label>
+                    <label for="company-website" data-i18n="suggestsiteLabel" >Website or Social Media Link (optional)</label>
                     <input type="url" id="company-website" placeholder="https://example.com">
                 </div>
                 
                 <div class="form-actions">
-                    <button type="button" class="form-btn cancel-btn" id="cancel-suggest-btn">
+                    <button type="button" class="form-btn cancel-btn" id="cancel-suggest-btn" data-i18n="suggestcancel">
                         Cancel Suggestion
                     </button>
-                    <button type="submit" class="form-btn submit-btn">
+                    <button type="submit" class="form-btn submit-btn"  data-i18n="suggestsubmit">
                         <i class="fas fa-paper-plane"></i> Submit Suggestion
                     </button>
                 </div>
@@ -211,8 +211,8 @@
                 <i class="fas fa-check-circle"></i>
             </div>
             <div class="notification-text">
-                <h3 id="notification-title">تمت العملية بنجاح!</h3>
-                <p id="notification-message">تم إضافة قسم جديد بنجاح</p>
+                <h3 id="notification-title"  data-i18n="notifsuccessTitle">تمت العملية بنجاح!</h3>
+                <p id="notification-message" data-i18n="notifaddedSection">تم إضافة قسم جديد بنجاح</p>
             </div>
         </div>
     </div>
@@ -220,12 +220,12 @@
   
 
 <div class="team-section">
-    <h2 class="team-title">Contributors</h2>
+    <h2 class="team-title"  data-i18n="teamtitle">Contributors</h2>
     <div class="team-grid">
       <!-- 1) Mohammad Ghazal -->
       <div class="team-member">
         <div class="member-name">Mohammad Ghazal</div>
-        <div class="member-role">Full-Stack Engineer</div>
+        <div class="member-role" data-i18n="teamrolesfullstack" >Full-Stack Engineer</div>
         <div class="member-description">
         </div>
         <div class="social-links">
@@ -241,7 +241,7 @@
       <!-- 2) Nawras Ibrahem -->
       <div class="team-member">
         <div class="member-name">Nawras Ibrahem</div>
-        <div class="member-role">Market Researcher</div>
+        <div class="member-role"  data-i18n="teamrolesresearcher">Market Researcher</div>
         <div class="member-description">
           
         </div>
@@ -259,7 +259,7 @@
       <!-- 3) Hazem Said -->
       <div class="team-member">
         <div class="member-name">Hazem Said</div>
-        <div class="member-role">Market Researcher</div>
+        <div class="member-role"  data-i18n="teamrolesresearcher" >Market Researcher</div>
         <div class="member-description">
             
           </div>
@@ -278,7 +278,7 @@
       <!-- 3) Taima Dshli -->
       <div class="team-member">
         <div class="member-name">Taima Dshli</div>
-        <div class="member-role">Market Researcher</div>
+        <div class="member-role"  data-i18n="teamrolesresearcher">Market Researcher</div>
         <div class="member-description">
         </div>
         <div class="social-links">
@@ -295,24 +295,24 @@
     <div class="modal" id="add-section-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Add New Section</h3>
+                <h3 class="modal-title" data-i18n="addtitle" >Add New Section</h3>
                 <button class="close-btn" id="close-add-modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="form-group">
-                <label for="new-section-name">New Section Name</label>
-                <input type="text" id="new-section-name" placeholder="Enter the new section name here">
+                <label for="new-section-name"  data-i18n="addnameLabel">New Section Name</label>
+                <input type="text" id="new-section-name"  data-i18n="addnamePh" placeholder="Enter the new section name here">
             </div>
             <div class="form-group">
-                <label for="section-link">Section Link (optional)</label>
-                <input type="url" id="section-link" placeholder="https://example.com">
+                <label for="section-link" data-i18n="addlinkLabel">Section Link (optional)</label>
+                <input type="url" id="section-link" data-i18n="addlinkPh" placeholder="https://example.com">
             </div>
             <div class="form-actions">
-                <button class="form-btn secondary" id="cancel-add-btn">
+                <button class="form-btn secondary" id="cancel-add-btn" data-i18n="commoncancel">
                     <i class="fas fa-times"></i> Cancel
                 </button>
-                <button class="form-btn primary" id="confirm-add-btn">
+                <button class="form-btn primary" id="confirm-add-btn" data-i18n="commonadd" >
                     <i class="fas fa-plus"></i> Add
                 </button>
             </div>
@@ -322,28 +322,28 @@
     <div class="modal" id="edit-section-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Edit Sections</h3>
+                <h3 class="modal-title"  data-i18n="edittitle">Edit Sections</h3>
                 <button class="close-btn" id="close-edit-modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="form-group">
-                <label for="section-select">Select Section to Edit</label>
+                <label for="section-select"  data-i18n="editselectLabel">Select Section to Edit</label>
                 <div class="section-list" id="section-list"></div>
             </div>
             <div class="form-group">
-                <label for="edit-section-content">New Section Name</label>
-                <input type="text" id="edit-section-content" placeholder="Enter the new section name">
+                <label for="edit-section-content"  data-i18n="editnewNameLabel">New Section Name</label>
+                <input type="text" id="edit-section-content"  data-i18n="editnewNamePh" placeholder="Enter the new section name">
             </div>
             <div class="form-group">
-                <label for="edit-section-link">Section Link</label>
-                <input type="url" id="edit-section-link" placeholder="https://example.com">
+                <label for="edit-section-link" data-i18n="editlinkLabel" >Section Link</label>
+                <input type="url" id="edit-section-link" data-i18n="editlinkPh" placeholder="https://example.com">
             </div>
             <div class="form-actions">
-                <button class="form-btn secondary" id="cancel-edit-btn">
+                <button class="form-btn secondary" id="cancel-edit-btn" data-i18n="commoncancel">
                     <i class="fas fa-times"></i> Cancel
                 </button>
-                <button class="form-btn primary" id="confirm-edit-btn">
+                <button class="form-btn primary" id="confirm-edit-btn"  data-i18n="commonsave">
                     <i class="fas fa-save"></i> Save Changes
                 </button>
             </div>
@@ -360,16 +360,16 @@
     <div class="modal" id="about-modal">
         <div class="modal-content about-modal-content">
           <div class="modal-header">
-            <h3 class="modal-title">About The Map</h3>
+            <h3 class="modal-title"data-i18n="aboutMaptitle" >About The Map</h3>
             <button class="close-btn" id="close-about-modal" aria-label="Close">
               <i class="fas fa-times"></i>
             </button>
           </div>
       
           <div class="about-modal-body">
-        <h4>Syrian Startup Ecosystem Map</h4>
-            <p>The first map of Syria’s Startup Ecosystem</p>
-            <p>
+        <h4 data-i18n="aboutMaph4">Syrian Startup Ecosystem Map</h4>
+            <p data-i18n="aboutMaptag">The first map of Syria’s Startup Ecosystem</p>
+            <p data-i18n="aboutMapp1">
               This visual guide provides a comprehensive overview of the key players driving the startup scene in Syria.
               Created by Aram Lab with help from Syrians both within the country and abroad, this map is a detailed resource
               that highlights the diverse players shaping the ecosystem. The guide shows that Syria’s startup ecosystem is
@@ -377,18 +377,18 @@
               what, identify areas of competition, and pinpoint existing gaps. The ultimate goal is to use this foundational
               information to help build a more cohesive, sustainable, and connected startup ecosystem in Syria.
             </p>
-            <p><strong>The tool divides the Syrian startup ecosystem across five main categories that together make up the foundational pillars:</strong></p>
+            <p  data-i18n="aboutMappillarsIntro"><strong>The tool divides the Syrian startup ecosystem across five main categories that together make up the foundational pillars:</strong></p>
             <ul>
-              <li>● Ideation Support</li>
-              <li>● Operation, Growth, and Markets</li>
-              <li>● Regulations and Government Support</li>
-              <li>● Networking and Culture</li>
-              <li>● Funding</li>
+              <li  data-i18n="pillar1">● Ideation Support</li>
+              <li  data-i18n="pillar2">● Operation, Growth, and Markets</li>
+              <li  data-i18n="pillar3">● Regulations and Government Support</li>
+              <li  data-i18n="pillar4">● Networking and Culture</li>
+              <li  data-i18n="pillar5">● Funding</li>
             </ul>
           </div>
       
           <div class="form-actions">
-            <button class="form-btn secondary" id="close-about-btn">Close</button>
+            <button class="form-btn secondary" id="close-about-btn" data-i18n="commonclose" >Close</button>
           </div>
         </div>
       </div>
@@ -396,27 +396,27 @@
       <div class="modal" id="contact-modal">
         <div class="modal-content about-modal-content">
           <div class="modal-header">
-            <h3 class="modal-title">Contact Us</h3>
+            <h3 class="modal-title"  data-i18n="contacttitle">Contact Us</h3>
             <button class="close-btn" id="close-contact-modal" aria-label="Close">
               <i class="fas fa-times"></i>
             </button>
           </div>
       
           <div class="about-modal-body">
-            <p>
+            <p data-i18n="contactp1">
               This map is the first attempt at listing all key players in the ecosystem and will be updated regularly to ensure greater accuracy.
               Should you have any comments or suggestions on the map or if you would like your organization or business to be listed, please contact:
             </p>
       
             <ul>
-              <li>Email: <a href="mailto:info@aramlab.info">info@aramlab.info</a></li>
-              <li>LinkedIn: <a href="https://www.linkedin.com/company/aram-lab-ecosystem-architect/" target="_blank" rel="noopener">Aram Lab</a></li>
+              <li> <strong  data-i18n="contactemail"> Email:</strong><a   data-i18n="link2" href="mailto:info@aramlab.info">info@aramlab.info</a></li>
+              <li><strong  data-i18n="contactlinkedin"> LinkedIn:</strong> <a data-i18n="link3" href="https://www.linkedin.com/company/aram-lab-ecosystem-architect/" target="_blank" rel="noopener">Aram Lab</a></li>
               
             </ul>
           </div>
       
           <div class="form-actions">
-            <button class="form-btn secondary" id="close-contact-btn">Close</button>
+            <button class="form-btn secondary" id="close-contact-btn" data-i18n="commonclose">Close</button>
           </div>
         </div>
       </div>
@@ -428,17 +428,17 @@
         <div class="footer-container">
           <div class="footer-left">
        
-            <p>Source: <span class="highlight">Data Collected by Aram Lab</span></p>
-            <p>© 2025 - Aram Lab. All rights reserved.</p>
+            <p data-i18n="source">Source: <span class="highlight" data-i18n="footersource">Data Collected by Aram Lab</span></p>
+            <p data-i18n="footercopy" >© 2025 - Aram Lab. All rights reserved.</p>
             <div class="footer-links">
-              <a href="#" id="aboutt-link">About Us</a>
-              <a href="#" id="privacy-link">Privacy Policy</a>
-              <a href="#"id="contact-link">Contact Us</a>
-              <a href="#" id="admin-login-link"><i class="fas fa-lock"></i> Admin Login</a>
+              <a href="#" id="aboutt-link" data-i18n="footeraboutUs">About Us</a>
+              <a href="#" id="privacy-link" data-i18n="footerprivacy">Privacy Policy</a>
+              <a href="#"id="contact-link" data-i18n="footercontact">Contact Us</a>
+              <a href="#" id="admin-login-link"  data-i18n="footeradmin"><i class="fas fa-lock"></i> Admin Login</a>
             </div>
             <div class="datainfo hidden">
             <i class="fas fa-database db-icon"></i>
-            <span>All changes are saved in database - Last Save:<span id="last-save-time">Not saved yet</span></span>
+            <span data-i18n="datainfo" >All changes are saved in database - Last Save:<span id="last-save-time">Not saved yet</span></span>
         </div>
           </div>
         </div>
@@ -448,30 +448,30 @@
 <div class="modal" id="login-modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title">Admin Login</h3>
+            <h3 class="modal-title" data-i18n="footeradmin">Admin Login</h3>
             <button class="close-btn" id="close-login-modal">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <form class="login-form">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter User Name">
+                <label for="username" data-i18n="footername">Username</label>
+                <input type="text" id="username" data-i18n="footername1" placeholder="Enter User Name">
             </div>
             <div class="form-group">
-                <label for="license-key">License Key*</label>
-                <input type="password" id="license-key" placeholder="Enter License Key" required>
+                <label for="license-key" data-i18n="footerpass">License Key*</label>
+                <input type="password" id="license-key" data-i18n="footerpass1"  placeholder="Enter License Key" required>
             </div>
             
             <div class="license-status" id="modal-license-status">
-                <span class="license-inactive"><i class="fas fa-times-circle"></i>License Inactive</span>
+                <span class="license-inactive"  data-i18n="footerlicenseac" ><i class="fas fa-times-circle"></i>License Inactive</span>
             </div>
             
             <div class="form-actions">
-                <button type="button" class="form-btn secondary" id="cancel-login-btn">
+                <button type="button" class="form-btn secondary" id="cancel-login-btn" data-i18n="commonclose">
                     Cancel
                 </button>
-                <button type="submit" class="form-btn primary">
+                <button   data-i18n="footerlicensea" type="submit" class="form-btn primary">
                     <i class="fas fa-key"></i> Activate License
                 </button>
             </div>
@@ -486,63 +486,62 @@
       <div class="modal" id="privacy-modal">
         <div class="modal-content about-modal-content">
           <div class="modal-header">
-            <h3 class="modal-title">Privacy Policy</h3>
+            <h3 class="modal-title" data-i18n="privacytitle" >Privacy Policy</h3>
             <button class="close-btn" id="close-privacy-modal" aria-label="Close">
               <i class="fas fa-times"></i>
             </button>
           </div>
       
            <div class="about-modal-body">
-            <h4>Last Updated: [22.08.2025]</h4>
-            <h4>1. Introduction</h4>
-            <p>
-              Welcome to Aram Lab. This Privacy Policy explains how we collect, use, and share your personal information when you use our website,
-              <a href="https://aramlab.info/" target="_blank" rel="noopener">https://aramlab.info/</a>.
-            </p>
-            <p>By using our Website, you agree to the terms of this policy. If you don't agree, please do not use the site.</p>
+            <h4 data-i18n="privacyupdated">Last Updated: [22.08.2025]</h4>
+            <h4 data-i18n="privacyh1">1. Introduction</h4>
+           <p>  <span data-i18n="privacyp1a">
+            Welcome to Aram Lab. This Privacy Policy explains how we collect, use, and share your personal information when you use our website, </span>
+              <a href="https://aramlab.info/" target="_blank" rel="noopener" data-i18n="link"> https://aramlab.info/ </a>. 
+           </p>
+            <p data-i18n="privacyp1b">By using our Website, you agree to the terms of this policy. If you don't agree, please do not use the site.</p>
       
-            <h4>2. Information We Collect</h4>
-            <p><strong>Personal Information:</strong>This is information that can identify you directly, like your name, email address, or phone number. We only collect this when you give it to us voluntarily, such as when you sign up for a newsletter, fill out a contact form.</p>
-            <p><strong>Non-Personal Information:</strong> This is data that can't be used to identify you. We collect this automatically as you use the Site. It includes things like your IP address, browser type, and the pages you visit. This helps us understand how our Site is used and how we can make it better.</p>
-            <p>We also use cookies and similar tracking technologies. These are small data files placed on your device that help us remember your preferences and improve your experience. You can manage your cookie settings in your browser.</p>
+            <h4 data-i18n="privacyh2">2. Information We Collect</h4>
+            <p data-i18n="privacyp2a"><strong>Personal Information:</strong>This is information that can identify you directly, like your name, email address, or phone number. We only collect this when you give it to us voluntarily, such as when you sign up for a newsletter, fill out a contact form.</p>
+            <p  data-i18n="privacyp2b"><strong>Non-Personal Information:</strong> This is data that can't be used to identify you. We collect this automatically as you use the Site. It includes things like your IP address, browser type, and the pages you visit. This helps us understand how our Site is used and how we can make it better.</p>
+            <p data-i18n="privacyp2c" >We also use cookies and similar tracking technologies. These are small data files placed on your device that help us remember your preferences and improve your experience. You can manage your cookie settings in your browser.</p>
       
-            <h4>3. How We Use Your Information</h4>
-            <p>We use the information we collect to:</p>
+            <h4 data-i18n="privacyh3">3. How We Use Your Information</h4>
+            <p  data-i18n="privacyp3a" >We use the information we collect to:</p>
             <ul>
-              <li>● Provide and improve our services.</li>
-              <li>● Communicate with you and respond to your questions.</li>
-              <li>● Analyze how the Site is used to improve its functionality.</li>
-              <li>● Protect the security of our Site and prevent fraud.</li>
-              <li>● Comply with legal requirements.</li>
+              <li  data-i18n="privacyu3a">● Provide and improve our services.</li>
+              <li  data-i18n="privacyu3b">● Communicate with you and respond to your questions.</li>
+              <li  data-i18n="privacyu3c">● Analyze how the Site is used to improve its functionality.</li>
+              <li  data-i18n="privacyu3d">● Protect the security of our Site and prevent fraud.</li>
+              <li  data-i18n="privacyu3e">● Comply with legal requirements.</li>
             </ul>
       
-            <h4>4. How We Share Your Information</h4>
-            <p>We do not sell, rent, or trade your personal information. We may share your information with trusted third-party service providers who help us run our website and business (e.g., website hosting, email services). These providers are required to keep your information confidential.</p>
-            <p>We may also disclose your information if we are required to by law or to protect our rights, property, or the safety of others.</p>
-            <h4>5. Data Security</h4>
-            <p>We take reasonable steps to protect your personal information from unauthorized access. However, no method of transmission over the internet is 100% secure. While we do our best to protect your data, we cannot guarantee its absolute security.</p>
+            <h4 data-i18n="privacyh4">4. How We Share Your Information</h4>
+            <p  data-i18n="privacyp4">We do not sell, rent, or trade your personal information. We may share your information with trusted third-party service providers who help us run our website and business (e.g., website hosting, email services). These providers are required to keep your information confidential.</p>
+            <p data-i18n="privacyp41">We may also disclose your information if we are required to by law or to protect our rights, property, or the safety of others.</p>
+            <h4 data-i18n="privacyh5">5. Data Security</h4>
+            <p data-i18n="privacyp5">We take reasonable steps to protect your personal information from unauthorized access. However, no method of transmission over the internet is 100% secure. While we do our best to protect your data, we cannot guarantee its absolute security.</p>
       
-            <h4>6. Your Choices</h4>
-            <p>You have control over your information:</p>
+            <h4  data-i18n="privacyh6">6. Your Choices</h4>
+            <p data-i18n="privacyp6a">You have control over your information:</p>
             <ul>
-              <li><strong>Opting Out:</strong> If you receive marketing emails from us, you can unsubscribe by clicking the "unsubscribe" link in the email.</li>
-              <li><strong>Managing Cookies:</strong> You can set your browser to refuse cookies. However, please be aware that some parts of the Site may not work properly if you do.</li>
+              <li data-i18n="privacyu6a"><strong>Opting Out:</strong> If you receive marketing emails from us, you can unsubscribe by clicking the "unsubscribe" link in the email.</li>
+              <li data-i18n="privacyu6b"><strong>Managing Cookies:</strong> You can set your browser to refuse cookies. However, please be aware that some parts of the Site may not work properly if you do.</li>
             </ul>
       
-            <h4>7. Links to Other Websites</h4>
-            <p>Our Site may contain links to other websites not operated by us. We are not responsible for the content or privacy practices of those sites. We encourage you to read the privacy policies of any third-party websites you visit.</p>
+            <h4 data-i18n="privacyh7">7. Links to Other Websites</h4>
+            <p data-i18n="privacyp7">Our Site may contain links to other websites not operated by us. We are not responsible for the content or privacy practices of those sites. We encourage you to read the privacy policies of any third-party websites you visit.</p>
       
-            <h4>8. Changes to this Policy</h4>
-            <p>We may update this Privacy Policy from time to time. We will post any changes on this page and update the "Last Updated" date at the top. Your continued use of the Site after an update means you accept the new policy.</p>
+            <h4 data-i18n="privacyh8">8. Changes to this Policy</h4>
+            <p data-i18n="privacyp8">We may update this Privacy Policy from time to time. We will post any changes on this page and update the "Last Updated" date at the top. Your continued use of the Site after an update means you accept the new policy.</p>
       
-            <h4>9. Contact Us</h4>
-            <p>If you have any questions or concerns about this policy, please contact us at:
-              <a href="mailto:info@arablab.info">info@arablab.info</a>
-            </p>
+            <h4 data-i18n="privacyh9">9. Contact Us</h4>
+           <span data-i18n="privacyp9">If you have any questions or concerns about this policy, please contact us at:  </span>
+              <a href="mailto:info@aramlab.info"data-i18n="link1">info@aramlab.info</a>
           </div>
       
           <div class="form-actions">
-            <button class="form-btn secondary" id="close-privacy-btn">Close</button>
+            <button class="form-btn secondary" id="close-privacy-btn"  data-i18n="commonclose" >Close</button>
           </div>
         </div>
       </div>
@@ -552,25 +551,25 @@
 <div class="modal" id="aboutt-modal">
     <div class="modal-content aboutt-modal-content">
       <div class="modal-header">
-        <h3 class="modal-title">About Us</h3>
+        <h3 class="modal-title" data-i18n="aboutUstitle" >About Us</h3>
         <button class="close-btn" id="close-aboutt-modal" aria-label="Close">
           <i class="fas fa-times"></i>
         </button>
       </div>
   
     <div class="aboutt-modal-body">
-        <h4>Aram Lab: Ecosystem Architect</h4>
+        <h4 data-i18n="aboutUsh4">Aram Lab: Ecosystem Architect</h4>
        <p></p>
-        <p>Aram Lab is an ecosystem architecture consulting company based in Germany, and established by a collective of experts and researchers. Our mission is to advance the design and development of sustainable ecosystems in Syria.</p>
-        <p>We actively engage with both the local Syrian community and the global Syrian diaspora, leveraging collaborative studies and in-depth research to shape ideal designs.</p>
-        <p>Our ultimate goal is to empower Syria's economy and foster long-term prosperity through innovative, community-driven solutions.</p>
-        <p><strong>For inquiries, please email:</strong> <a href="mailto:info@aramlab.info">info@aramlab.info</a></p>
-        <p>© 2025 Aram Lab. All rights reserved</p>
+        <p data-i18n="aboutUsp1">Aram Lab is an ecosystem architecture consulting company based in Germany, and established by a collective of experts and researchers. Our mission is to advance the design and development of sustainable ecosystems in Syria.</p>
+        <p  data-i18n="aboutUsp2">We actively engage with both the local Syrian community and the global Syrian diaspora, leveraging collaborative studies and in-depth research to shape ideal designs.</p>
+        <p data-i18n="aboutUsp3" >Our ultimate goal is to empower Syria's economy and foster long-term prosperity through innovative, community-driven solutions.</p>
+        <p><strong data-i18n="aboutUsp4">For inquiries, please email:</strong> <a href="mailto:info@aramlab.info">info@aramlab.info</a></p>
+        <p  data-i18n="aboutUsp5">© 2025 Aram Lab. All rights reserved</p>
        
       </div>
   
       <div class="form-actions">
-        <button class="form-btn secondary" id="close-aboutt-btn">Close</button>
+        <button class="form-btn secondary" id="close-aboutt-btn"  data-i18n="commonclose">Close</button>
       </div>
     </div>
   </div>
@@ -585,6 +584,7 @@
     <script src="js/map.js"></script>
     <script src="js/modals.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script src="js/i18n.js"></script>    
     <script src="js/main.js"></script>
 
 
