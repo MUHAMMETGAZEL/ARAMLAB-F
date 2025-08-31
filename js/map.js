@@ -82,7 +82,7 @@ const sectors = [
     endAngle: 4*Math.PI/5, 
     subsections: [
       "Co-working Spaces",
-      "Research and Development, Labs",
+      "Research and Development Labs",
       "Startup Hiring",
       "Startup Accounting",
       "Startup Marketing",
