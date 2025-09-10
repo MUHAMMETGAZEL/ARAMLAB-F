@@ -86,6 +86,7 @@ const sectors = [
       "Startup Hiring",
       "Startup Accounting",
       "Startup Marketing",
+      "Startup Consulting",
       "Women's Support"
     ]
   },
