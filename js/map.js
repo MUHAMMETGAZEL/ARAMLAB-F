@@ -58,10 +58,11 @@ const rings = [
 // القطاعات الرئيسية
 const sectors = [
   { 
+
     id: 1, 
     name: "Ideation Support", 
     /*color: "#008080", */
-    color: "#badb0c", 
+    color: "#E8FFFF", 
     startAngle: 0, 
     endAngle: 2*Math.PI/5, 
     subsections: [
@@ -77,7 +78,7 @@ const sectors = [
   { 
     id: 2, 
     name: "Operation, Growth, and Markets", 
-    color: "#ff6600", 
+    color: "#CFF2F2", 
     startAngle: 2*Math.PI/5, 
     endAngle: 4*Math.PI/5, 
     subsections: [
@@ -94,7 +95,7 @@ const sectors = [
     id: 3, 
     name: "Regulations and Government Support", 
    /* color: "#ffdd33", */
-    color: "#9dbdef", 
+    color: "#BFDCDC", 
     startAngle: 4*Math.PI/5, 
     endAngle: 6*Math.PI/5, 
     subsections: [
@@ -106,7 +107,7 @@ const sectors = [
   { 
     id: 4, 
     name: "Networking and Culture", 
-    color: "#cc3366", 
+    color: "#8BAAAA", 
     startAngle: 6*Math.PI/5, 
     endAngle: 8*Math.PI/5, 
     subsections: [
@@ -121,7 +122,7 @@ const sectors = [
     id: 5, 
     name: "Funding", 
     /* color: "#0066cc", */
-    color: "#38a118", 
+    color: "#5E7B7B", 
     startAngle: 8*Math.PI/5, 
     endAngle: 2*Math.PI, 
     subsections: [
