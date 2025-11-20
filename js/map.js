@@ -62,7 +62,7 @@ const sectors = [
     id: 1, 
     name: "Ideation Support", 
     /*color: "#008080", */
-    color: "#E8FFFF", 
+    color: "#008080", 
     startAngle: 0, 
     endAngle: 2*Math.PI/5, 
     subsections: [
@@ -78,7 +78,7 @@ const sectors = [
   { 
     id: 2, 
     name: "Operation, Growth, and Markets", 
-    color: "#CFF2F2", 
+    color: "#ff6600", 
     startAngle: 2*Math.PI/5, 
     endAngle: 4*Math.PI/5, 
     subsections: [
@@ -95,7 +95,7 @@ const sectors = [
     id: 3, 
     name: "Regulations and Government Support", 
    /* color: "#ffdd33", */
-    color: "#BFDCDC", 
+    color: "#ffdd33", 
     startAngle: 4*Math.PI/5, 
     endAngle: 6*Math.PI/5, 
     subsections: [
@@ -107,7 +107,7 @@ const sectors = [
   { 
     id: 4, 
     name: "Networking and Culture", 
-    color: "#8BAAAA", 
+    color: "#cc3366", 
     startAngle: 6*Math.PI/5, 
     endAngle: 8*Math.PI/5, 
     subsections: [
@@ -122,7 +122,7 @@ const sectors = [
     id: 5, 
     name: "Funding", 
     /* color: "#0066cc", */
-    color: "#5E7B7B", 
+    color: "#0066cc", 
     startAngle: 8*Math.PI/5, 
     endAngle: 2*Math.PI, 
     subsections: [
