@@ -109,6 +109,70 @@ function setupModalListeners() {
     }
     document.getElementById('edit-section-modal').classList.remove('active');
   });
+
+
+
+
+
+
+  // 🔴 زر حذف الـ item المحدد داخل القسم
+  document.getElementById('delete-section-item-btn').addEventListener('click', async function() {
+    // نفس منطق الأزرار الإدارية الأخرى: يتطلب ترخيص
+    if (!licenseActive) {
+      showNotification('License Error', 'You must activate the license first');
+      return;
+    }
+
+    if (!activeSection || !sectionDatabase[activeSection]) {
+      showNotification('Error', 'Please select a subsection first');
+      return;
+    }
+
+    const selectedItem = document.querySelector('.section-item.active');
+    if (!selectedItem) {
+      alert('Please select an item to delete');
+      return;
+    }
+
+    const sectionId = parseInt(selectedItem.dataset.id);
+    const sec = sectionDatabase[activeSection];
+    const itemName = sec.sectionNames[sectionId];
+
+    const confirmDel = confirm(`Are you sure you want to delete "${itemName}" from this section?`);
+    if (!confirmDel) return;
+
+    // ✅ حذف الاسم والرابط من المصفوفة
+    sec.sectionNames.splice(sectionId, 1);
+    sec.sectionLinks.splice(sectionId, 1);
+
+    // نحفظ في قاعدة البيانات بنفس أسلوبك
+    if (activeSection) {
+      const sectorColor = sec.sectorColor;
+      const saved = await saveData();
+      if (saved) {
+        // إعادة رسم الدائرة الخاصة بالقسم النشط
+        createNewCircleMap(activeSection, sectorColor);
+
+        // تحديث قائمة العناصر في نافذة التعديل حتى تتغير الأرقام والترتيب
+        updateSectionList();
+
+        // تفريغ حقول الإدخال بعد الحذف
+        document.getElementById('edit-section-content').value = '';
+        document.getElementById('edit-section-link').value = '';
+
+        showNotification('Deleted successfully!', `The item "${itemName}" has been deleted from this section`);
+      } else {
+        showNotification('Save Error', 'Failed to save changes after deletion');
+      }
+    }
+  });
+
+
+
+
+
+
+
   
   // نافذة اقتراحات الشركات
  /* document.getElementById('suggest-company').addEventListener('click', function() {
