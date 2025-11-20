@@ -161,42 +161,6 @@ document.getElementById('view-suggestions').classList.add('flex'); // إذا ت�
 }*/
 
 
-document.getElementById('delete-section-btn')?.addEventListener('click', async () => {
-    if (!window.isAdmin) {
-        showNotification('Error', 'Admin only action');
-        return;
-    }
-
-    if (!activeSection || !sectionDatabase[activeSection]) {
-        showNotification('Error', 'No section selected');
-        return;
-    }
-
-    const confirmDel = confirm(`Are you sure you want to delete the section: ${activeSection}? This action cannot be undone.`);
-    if (!confirmDel) return;
-
-    try {
-        // حذف القسم محلياً
-        delete sectionDatabase[activeSection];
-
-        // حفظ التغييرات في الخادم
-        await ApiClient.saveData(sectionDatabase);
-
-        // إغلاق المودال
-        document.getElementById('edit-section-modal').classList.remove('active');
-
-        // تحديث الخريطة
-        activeSection = null;
-        drawMap();
-
-        showNotification('Success', 'Section deleted successfully');
-    } catch (err) {
-        console.error(err);
-        showNotification('Error', 'Failed to delete section');
-    }
-});
-
-
 
 
 
@@ -436,6 +400,63 @@ function updateLastSaveTime() {
   const now = new Date();
   document.getElementById('last-save-time').textContent = now.toLocaleTimeString('ar-SA');
 }
+
+
+
+
+function loadEditSectionItems(sectionKey) {
+    const listContainer = document.getElementById('section-list');
+    listContainer.innerHTML = '';
+
+    const sec = sectionDatabase[sectionKey];
+    if (!sec) return;
+
+    sec.sectionNames.forEach((name, index) => {
+        const item = document.createElement('div');
+        item.className = 'edit-item';
+
+        item.innerHTML = `
+            <span class="item-name">${name}</span>
+            <button class="delete-item-btn admin-only" data-index="${index}">
+                <i class="fas fa-trash"></i>
+            </button>
+        `;
+
+        listContainer.appendChild(item);
+    });
+
+    // ربط أحداث الحذف
+    document.querySelectorAll('.delete-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const i = btn.dataset.index;
+            deleteSectionItem(sectionKey, i);
+        });
+    });
+}
+
+async function deleteSectionItem(sectionKey, itemIndex) {
+    if (!window.isAdmin) return;
+
+    const sec = sectionDatabase[sectionKey];
+    if (!sec) return;
+
+    const confirmDel = confirm("Are you sure you want to delete this item?");
+    if (!confirmDel) return;
+
+    // حذف العنصر
+    sec.sectionNames.splice(itemIndex, 1);
+    sec.sectionLinks.splice(itemIndex, 1);
+
+    // حفظ على الخادم
+    await ApiClient.saveData(sectionDatabase);
+
+    // تحديث الواجهة
+    loadEditSectionItems(sectionKey);
+    drawMap();
+
+    showNotification("Success", "Item deleted successfully");
+}
+
 
 
 
