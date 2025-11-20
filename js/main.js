@@ -161,6 +161,52 @@ document.getElementById('view-suggestions').classList.add('flex'); // إذا ت�
 }*/
 
 
+document.getElementById('delete-section-btn')?.addEventListener('click', async () => {
+    if (!window.isAdmin) {
+        showNotification('Error', 'Admin only action');
+        return;
+    }
+
+    if (!activeSection || !sectionDatabase[activeSection]) {
+        showNotification('Error', 'No section selected');
+        return;
+    }
+
+    const confirmDel = confirm(`Are you sure you want to delete the section: ${activeSection}? This action cannot be undone.`);
+    if (!confirmDel) return;
+
+    try {
+        // حذف القسم محلياً
+        delete sectionDatabase[activeSection];
+
+        // حفظ التغييرات في الخادم
+        await ApiClient.saveData(sectionDatabase);
+
+        // إغلاق المودال
+        document.getElementById('edit-section-modal').classList.remove('active');
+
+        // تحديث الخريطة
+        activeSection = null;
+        drawMap();
+
+        showNotification('Success', 'Section deleted successfully');
+    } catch (err) {
+        console.error(err);
+        showNotification('Error', 'Failed to delete section');
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
