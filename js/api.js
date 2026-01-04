@@ -5,12 +5,18 @@ baseUrl:
       : (location.hostname.endsWith('aramlab.info')
           ? 'https://api.aramlab.info/api'
           : 'https://startup-syria-backend.onrender.com/api'),*/
-const baseUrl = 
+/*const baseUrl = 
   (location.hostname === 'localhost')
     ? 'http://localhost:5001/api'
     : (location.hostname === 'map.aramlab.info')
         ? 'https://api.aramlab.info/api'  // للـ API
         : 'https://startup-syria-backend.onrender.com/api';
+*/
+const ApiClient = {
+baseUrl:
+    (location.hostname === 'localhost')
+      ? 'http://localhost:5001/api'
+     : 'https://startup-syria-backend.onrender.com/api'),
   async request(endpoint, method = 'GET', data = null, requiresAuth = false) {
     const fullUrl = this.baseUrl + endpoint;
     const headers = {};
