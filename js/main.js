@@ -185,7 +185,7 @@ function setRotationVisible(isVisible) {
 
 
 
-
+/*
 async function fetchUserRole() {
   try {
     const response = await fetch(
@@ -195,6 +195,23 @@ async function fetchUserRole() {
       { credentials: 'include' }
     );
     if (!response.ok) return null;
+    const data = await response.json();
+    return data.user?.role || null;
+  } catch {
+    return null;
+  }
+}
+*/
+async function fetchUserRole() {
+  try {
+    const base =
+      (location.hostname === 'localhost')
+        ? 'http://localhost:5001/api'
+        : 'https://startup-syria-backend.onrender.com/api';
+
+    const response = await fetch(base + '/auth/verify', { credentials: 'include' });
+    if (!response.ok) return null;
+
     const data = await response.json();
     return data.user?.role || null;
   } catch {
