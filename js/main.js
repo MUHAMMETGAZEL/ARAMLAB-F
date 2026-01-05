@@ -188,10 +188,12 @@ function setRotationVisible(isVisible) {
 
 async function fetchUserRole() {
   try {
+    const baseUrl = (location.hostname === 'localhost')
+      ? 'http://localhost:5001/api'
+      : 'https://startup-syria-backend.onrender.com/api';
+    
     const response = await fetch(
-      (location.hostname === 'localhost'
-        ? 'http://localhost:5001/api'
-        : 'https://api.aramlab.info/api') + '/auth/verify',
+      baseUrl + '/auth/verify',
       { credentials: 'include' }
     );
     if (!response.ok) return null;
