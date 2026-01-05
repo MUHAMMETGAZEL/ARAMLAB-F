@@ -1,3 +1,74 @@
+// api.js
+const ApiClient = {
+  baseUrl:
+    (location.hostname === 'localhost')
+      ? 'http://localhost:5001/api'
+      : 'https://api.aramlab.info/api',
+
+  async request(endpoint, method = 'GET', data = null) {
+    const fullUrl = this.baseUrl + endpoint;
+
+    const headers = {};
+    const options = {
+      method,
+      headers,
+      credentials: 'include',
+    };
+
+    if (data !== null) {
+      headers['Content-Type'] = 'application/json';
+      options.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(fullUrl, options);
+
+    if (response.status === 401) {
+      // لا تكسر الخريطة بسبب verify
+      throw new Error('Unauthorized');
+    }
+
+    if (!response.ok) {
+      const e = await response.json().catch(() => ({}));
+      throw new Error(e.error || 'Request failed');
+    }
+
+    return response.json();
+  },
+
+  // public
+  getData() {
+    return this.request('/data', 'GET');
+  },
+
+  submitSuggestion(suggestion) {
+    return this.request('/suggestions', 'POST', suggestion);
+  },
+
+  // admin
+  login(licenseKey) {
+    return this.request('/auth/login', 'POST', { licenseKey });
+  },
+
+  getSuggestions() {
+    return this.request('/suggestions', 'GET');
+  },
+
+  updateSuggestionStatus(id, newStatus) {
+    return this.request(`/suggestions/${id}/status`, 'PUT', { status: newStatus });
+  },
+
+  deleteSuggestion(id) {
+    return this.request(`/suggestions/${id}`, 'DELETE');
+  },
+
+  saveData(data) {
+    return this.request('/data', 'POST', data);
+  },
+};
+
+
+
+
 /*const ApiClient = {
 baseUrl:
     (location.hostname === 'localhost')
@@ -5,13 +76,13 @@ baseUrl:
       : (location.hostname.endsWith('map.aramlab.info')
           ? 'https://api.aramlab.info/api'
           : 'https://startup-syria-backend.onrender.com/api'),*/
-const baseUrl = 
+
 /*  (location.hostname === 'localhost')
     ? 'http://localhost:5001/api'
     : (location.hostname === 'map.aramlab.info')
         ? 'https://api.aramlab.info/api'  // للـ API
         : 'https://startup-syria-backend.onrender.com/api';*/
-
+/*const baseUrl = 
   : (location.hostname === 'map.aramlab.info')
           ? 'https://startup-syria-backend.onrender.com/api'
           : 'https://api.aramlab.info/api',
@@ -62,3 +133,12 @@ const baseUrl =
   },
 
 };
+
+
+
+
+
+
+
+
+*/
