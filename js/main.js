@@ -318,7 +318,7 @@ function ensureAllSectionsExist() {
   if (window.isAdmin === true) {
     saveData();
   }
-}
+}}
 
 
 
