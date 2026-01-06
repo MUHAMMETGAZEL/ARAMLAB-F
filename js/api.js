@@ -3,32 +3,34 @@ const ApiClient = {
     ? 'http://localhost:5001/api'
     : 'https://api.aramlab.info/api',
 
-  async request(endpoint, method = 'GET', data = null) {
+async request(endpoint, method = 'GET', data = null, requiresAuth = false) {
     const fullUrl = this.baseUrl + endpoint;
+    const headers = {};
+    const options = { method, headers, credentials: 'include' };
+    if (data) { headers['Content-Type'] = 'application/json'; options.body = JSON.stringify(data); }
+    try {
+      const response = await fetch(fullUrl, options);
+      if (response.status === 401) { licenseActive = false; updateLicenseUI(); throw new Error('Session expired, please reactivate'); }
+      if (!response.ok) { const e = await response.json().catch(()=>({})); throw new Error(e.error || 'Request failed'); }
+      return response.json();
+    } catch (error) { console.error(`خطأ في الطلب ${method} إلى ${fullUrl}:`, error); throw error; }
+  }, 
 
-    const options = {
-      method,
-      credentials: 'include',
-      headers: {}
-    };
 
-    if (data) {
-      options.headers['Content-Type'] = 'application/json';
-      options.body = JSON.stringify(data);
-    }
 
-    const response = await fetch(fullUrl, options);
 
-    // خلي 401 يرجع null بدل ما يوقف الدنيا
-    if (response.status === 401) return null;
 
-    if (!response.ok) {
-      const err = await response.text().catch(()=>'');
-      throw new Error(err || 'Request failed');
-    }
 
-    return response.json();
-  },
+
+
+
+
+
+
+
+
+
+
 
 
   getSuggestions() {
