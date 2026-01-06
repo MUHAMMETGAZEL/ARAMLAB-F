@@ -288,11 +288,20 @@ async function loadData() {
 
 function ensureAllSectionsExist() {
   let hasChanges = false;
+
   sectors.forEach(sector => {
     sector.subsections.forEach(subsection => {
-      if (!sectionDatabase[subsection]) {
+      const sec = sectionDatabase?.[subsection];
+
+      const ok =
+        sec &&
+        Array.isArray(sec.sectionNames) &&
+        Array.isArray(sec.sectionLinks) &&
+        typeof sec.sectorColor === 'string';
+
+      if (!ok) {
         sectionDatabase[subsection] = {
-          sectionNames: Array.from({length: sectionCount}, (_, i) => `القسم ${i+1}`),
+          sectionNames: Array.from({ length: sectionCount }, (_, i) => `القسم ${i + 1}`),
           sectionLinks: Array(sectionCount).fill(''),
           sectorColor: sector.color
         };
@@ -300,11 +309,10 @@ function ensureAllSectionsExist() {
       }
     });
   });
-  
-  if (hasChanges) {
-    saveData();
-  }
+
+  if (hasChanges) saveData();
 }
+
 
 
 function saveDataLocally() {
