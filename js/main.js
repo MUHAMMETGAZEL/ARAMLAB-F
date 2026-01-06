@@ -310,7 +310,14 @@ function ensureAllSectionsExist() {
     });
   });
 
-  if (hasChanges) saveData();
+  if (hasChanges) {
+  // احفظ محليًا دائمًا
+  saveDataLocally();
+
+  // احفظ على السيرفر فقط إذا المستخدم أدمن
+  if (window.isAdmin === true) {
+    saveData();
+  }
 }
 
 
